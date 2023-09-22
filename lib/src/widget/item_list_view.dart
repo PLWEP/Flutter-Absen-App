@@ -1,4 +1,3 @@
-import 'package:absen_app/src/widget/bottom_nav.dart';
 import 'package:absen_app/src/widget/item_details_view.dart';
 import 'package:absen_app/src/widget/list_item.dart';
 import 'package:flutter/material.dart';
@@ -48,15 +47,15 @@ class _ItemListViewState extends State<ItemListView> {
         },
       );
     } else if (page == 1) {
-      return Center(
+      return const Center(
         child: Text("Profil"),
       );
     } else if (page == 2) {
-      return Center(
+      return const Center(
         child: Text("Setting"),
       );
     } else {
-      return Center(
+      return const Center(
         child: Text("Terjadi Kesalahan"),
       );
     }
@@ -79,47 +78,44 @@ class _ItemListViewState extends State<ItemListView> {
               width: double.infinity / 2,
               height: 60,
               decoration: BoxDecoration(
-                color: Colors.lightBlueAccent,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black38,
-                    blurRadius: 10,
-                    offset: Offset(5, 5),
-                  ),
-                ],
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.blue.shade300, Colors.white],
-                ),
+                color: Colors.black87,
+                borderRadius: BorderRadius.circular(15),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   IconButton(
+                    iconSize: 30,
+                    splashRadius: 10,
+                    color: Colors.white,
                     onPressed: () {
                       setState(() {
                         page = 0;
                       });
                     },
-                    icon: Icon(Icons.home, size: 30),
+                    icon: const Icon(Icons.home),
                   ),
                   IconButton(
+                    iconSize: 30,
+                    splashRadius: 10,
+                    color: Colors.white,
                     onPressed: () {
                       setState(() {
                         page = 1;
                       });
                     },
-                    icon: Icon(Icons.person, size: 30),
+                    icon: const Icon(Icons.person),
                   ),
                   IconButton(
+                    iconSize: 30,
+                    splashRadius: 10,
+                    color: Colors.white,
                     onPressed: () {
                       setState(() {
                         page = 2;
                       });
                     },
-                    icon: Icon(Icons.settings, size: 30),
+                    icon: const Icon(Icons.settings),
                   ),
                 ],
               ),
