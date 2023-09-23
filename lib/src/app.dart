@@ -1,4 +1,4 @@
-import 'package:absen_app/src/home.dart';
+import 'package:absen_app/src/view/base_view.dart';
 import 'package:absen_app/src/widget/item_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
                   case ItemDetailsView.routeName:
                     return const ItemDetailsView();
                   default:
-                    return HomePage(
+                    return BaseView(
                       settingsController: settingsController,
                     );
                 }

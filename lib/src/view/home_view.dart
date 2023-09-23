@@ -1,10 +1,10 @@
-import 'package:absen_app/src/sample_feature/course_class_item.dart';
+import 'package:absen_app/src/models/course_class_item.dart';
 import 'package:absen_app/src/widget/item_details_view.dart';
 import 'package:absen_app/src/widget/item_list.dart';
 import 'package:flutter/material.dart';
 
-class ItemListView extends StatelessWidget {
-  ItemListView({
+class HomeView extends StatelessWidget {
+  HomeView({
     super.key,
   });
 
