@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget currentPage() {
     if (page == 0) {
-      return const ItemListView();
+      return ItemListView();
     } else if (page == 1) {
       return const Center(
         child: Text("Profil"),
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
             alignment: Alignment.bottomCenter,
             child: Container(
               margin: const EdgeInsets.only(
-                bottom: 25,
+                bottom: 15,
                 left: 25,
                 right: 25,
               ),

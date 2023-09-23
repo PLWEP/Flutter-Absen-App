@@ -1,24 +1,16 @@
+import 'package:absen_app/src/sample_feature/course_class_item.dart';
 import 'package:absen_app/src/widget/item_details_view.dart';
-import 'package:absen_app/src/widget/list_item.dart';
+import 'package:absen_app/src/widget/item_list.dart';
 import 'package:flutter/material.dart';
 
-import '../sample_feature/sample_item.dart';
-
 class ItemListView extends StatelessWidget {
-  const ItemListView({
+  ItemListView({
     super.key,
-    this.items = const [
-      SampleItem(1),
-      SampleItem(2),
-      SampleItem(3),
-      SampleItem(4),
-      SampleItem(5),
-    ],
   });
 
   static const routeName = '/';
 
-  final List<SampleItem> items;
+  final List<CourseClass> items = courseClasses;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +21,10 @@ class ItemListView extends StatelessWidget {
         final item = items[index];
 
         return ItemList(
-          title: 'Class ${item.id}',
+          id: item.id,
+          name: item.name,
+          sks: item.sks,
+          totalColleges: item.totalColleges,
           onTap: () {
             Navigator.restorablePushNamed(
               context,
