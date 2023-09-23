@@ -14,25 +14,48 @@ class ItemListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      restorationId: 'classListView',
-      itemCount: items.length,
-      itemBuilder: (BuildContext context, int index) {
-        final item = items[index];
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 10,
+          ),
+          height: 60,
+          child: Form(
+            child: TextFormField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                suffixIcon: Icon(Icons.search),
+              ),
+              style: const TextStyle(fontSize: 20),
+              cursorWidth: 1.5,
+            ),
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            restorationId: 'classListView',
+            itemCount: items.length,
+            itemBuilder: (BuildContext context, int index) {
+              final item = items[index];
 
-        return ItemList(
-          id: item.id,
-          name: item.name,
-          sks: item.sks,
-          totalColleges: item.totalColleges,
-          onTap: () {
-            Navigator.restorablePushNamed(
-              context,
-              ItemDetailsView.routeName,
-            );
-          },
-        );
-      },
+              return ItemList(
+                id: item.id,
+                name: item.name,
+                sks: item.sks,
+                totalColleges: item.totalColleges,
+                onTap: () {
+                  Navigator.restorablePushNamed(
+                    context,
+                    ItemDetailsView.routeName,
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
