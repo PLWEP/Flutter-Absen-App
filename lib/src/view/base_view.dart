@@ -19,7 +19,7 @@ class _BaseViewState extends State<BaseView> {
     if (page == 0) {
       return HomeView();
     } else if (page == 1) {
-      return ProfileView();
+      return const ProfileView();
     } else if (page == 2) {
       return SettingsView(controller: widget.settingsController);
     } else {

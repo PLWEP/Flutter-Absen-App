@@ -24,9 +24,13 @@ class HomeView extends StatelessWidget {
           height: 60,
           child: Form(
             child: TextFormField(
+              cursorColor: Colors.blue,
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
                 suffixIcon: Icon(Icons.search),
+                suffixIconColor: Colors.blue,
               ),
               style: const TextStyle(fontSize: 20),
               cursorWidth: 1.5,
