@@ -7,13 +7,45 @@ class ItemDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Class Details'),
-      ),
-      body: const Center(
-        child: Text('More Class Information Here'),
-      ),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.blue.shade900,
+            title: const Text('Class Details'),
+            bottom: const TabBar(tabs: [
+              Tab(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.book),
+                    SizedBox(width: 6),
+                    Text('Content'),
+                  ],
+                ),
+              ),
+              Tab(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.people),
+                    SizedBox(width: 6),
+                    Text('Colleges'),
+                  ],
+                ),
+              ),
+            ]),
+          ),
+          body: const TabBarView(
+            children: [
+              Center(
+                child: Text("Content"),
+              ),
+              Center(
+                child: Text("Colleges"),
+              ),
+            ],
+          )),
     );
   }
 }

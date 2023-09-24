@@ -42,8 +42,9 @@ class _BaseViewState extends State<BaseView> {
               decoration: BoxDecoration(
                 color: Colors.blue.shade900,
                 borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15)),
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
