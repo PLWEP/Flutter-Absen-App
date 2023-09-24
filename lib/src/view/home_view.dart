@@ -45,14 +45,12 @@ class HomeView extends StatelessWidget {
               final item = items[index];
 
               return ItemList(
-                id: item.id,
-                name: item.name,
-                sks: item.sks,
-                totalColleges: item.totalColleges,
+                item: item,
                 onTap: () {
-                  Navigator.restorablePushNamed(
+                  Navigator.pushNamed(
                     context,
                     ItemDetailsView.routeName,
+                    arguments: item,
                   );
                 },
               );

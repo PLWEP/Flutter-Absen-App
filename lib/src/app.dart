@@ -1,3 +1,4 @@
+import 'package:absen_app/src/models/course_class_item.dart';
 import 'package:absen_app/src/view/base_view.dart';
 import 'package:absen_app/src/widget/item_details_view.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'settings/settings_controller.dart';
 
-/// The Widget that configures your application.
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
@@ -42,7 +42,10 @@ class MyApp extends StatelessWidget {
               builder: (BuildContext context) {
                 switch (routeSettings.name) {
                   case ItemDetailsView.routeName:
-                    return const ItemDetailsView();
+                    return ItemDetailsView(
+                      item: ModalRoute.of(context)?.settings.arguments
+                          as CourseClass,
+                    );
                   default:
                     return BaseView(
                       settingsController: settingsController,

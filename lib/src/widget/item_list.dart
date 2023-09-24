@@ -1,18 +1,13 @@
+import 'package:absen_app/src/models/course_class_item.dart';
 import 'package:flutter/material.dart';
 
 class ItemList extends StatelessWidget {
-  final String id;
-  final String name;
-  final int sks;
-  final int totalColleges;
+  final CourseClass item;
   final Function() onTap;
   const ItemList({
     super.key,
-    required this.name,
     required this.onTap,
-    required this.id,
-    required this.sks,
-    required this.totalColleges,
+    required this.item,
   });
 
   @override
@@ -47,7 +42,7 @@ class ItemList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  id,
+                  item.id,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 25,
@@ -56,7 +51,7 @@ class ItemList extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  name,
+                  item.name,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -69,7 +64,7 @@ class ItemList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Jumlah SKS : $sks",
+                  "Jumlah SKS : ${item.sks}",
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -77,7 +72,7 @@ class ItemList extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  "Jumlah Mahasiswa : $totalColleges",
+                  "Jumlah Mahasiswa : ${item.totalColleges}",
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,

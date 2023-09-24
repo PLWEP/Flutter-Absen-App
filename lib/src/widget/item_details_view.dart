@@ -1,7 +1,12 @@
+import 'package:absen_app/src/models/course_class_item.dart';
 import 'package:flutter/material.dart';
 
 class ItemDetailsView extends StatelessWidget {
-  const ItemDetailsView({super.key});
+  final CourseClass item;
+  const ItemDetailsView({
+    super.key,
+    required this.item,
+  });
 
   static const routeName = '/class_details';
 
