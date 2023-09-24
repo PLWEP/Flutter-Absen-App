@@ -17,7 +17,12 @@ class ItemDetailsView extends StatelessWidget {
       child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.blue.shade900,
-            title: const Text('Class Details'),
+            title: Text(
+              "${item.name} ${item.id}",
+              style: const TextStyle(
+                fontSize: 15,
+              ),
+            ),
             bottom: const TabBar(tabs: [
               Tab(
                 child: Row(
@@ -41,13 +46,44 @@ class ItemDetailsView extends StatelessWidget {
               ),
             ]),
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: [
-              Center(
-                child: Text("Content"),
+              ListView.builder(
+                itemCount: item.contents.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final content = item.contents[index];
+
+                  return ListTile(
+                    title: Text(
+                      content.title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(content.description),
+                  );
+                },
               ),
-              Center(
-                child: Text("Colleges"),
+              ListView.builder(
+                itemCount: item.colleges.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final college = item.colleges[index];
+
+                  return ListTile(
+                    title: Text(
+                      college.name,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(college.nim),
+                    leading: Icon(
+                      college.gender == "Male" ? Icons.male : Icons.female,
+                    ),
+                  );
+                },
               ),
             ],
           )),
