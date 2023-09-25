@@ -1,10 +1,8 @@
 class Konten {
   String judul;
-  String subJudul;
   String deskripsi;
   Konten({
     required this.judul,
-    required this.subJudul,
     required this.deskripsi,
   });
 
@@ -15,7 +13,6 @@ class Konten {
   }) {
     return Konten(
       judul: judul ?? this.judul,
-      subJudul: subJudul ?? this.subJudul,
       deskripsi: deskripsi ?? this.deskripsi,
     );
   }
@@ -23,7 +20,6 @@ class Konten {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'judul': judul,
-      'subJudul': subJudul,
       'deskripsi': deskripsi,
     };
   }
@@ -31,7 +27,6 @@ class Konten {
   factory Konten.fromMap(Map<String, dynamic> map) {
     return Konten(
       judul: map['judul'] as String,
-      subJudul: map['subJudul'] as String,
       deskripsi: map['deskripsi'] as String,
     );
   }

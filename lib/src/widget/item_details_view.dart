@@ -55,7 +55,7 @@ class ItemDetailsView extends StatelessWidget {
 
                   return ExpansionTile(
                     title: Text(
-                      content.judul,
+                      "Pertemuan ${index + 1}",
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class ItemDetailsView extends StatelessWidget {
                     ),
                     children: <Widget>[
                       ListTile(
-                        title: Text(content.subJudul),
+                        title: Text(content.judul),
                         subtitle: Text(content.deskripsi),
                       ),
                     ],

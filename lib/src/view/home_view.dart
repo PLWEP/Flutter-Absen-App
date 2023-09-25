@@ -10,7 +10,7 @@ class HomeView extends StatelessWidget {
 
   static const routeName = '/';
 
-  final List<MataKuliah> items = courseClasses;
+  final List<MataKuliah> items = daftarMataKuliah;
 
   @override
   Widget build(BuildContext context) {
