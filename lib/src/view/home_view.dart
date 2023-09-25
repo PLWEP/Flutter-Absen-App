@@ -16,27 +16,6 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          margin: const EdgeInsets.symmetric(
-            horizontal: 10,
-            vertical: 10,
-          ),
-          height: 60,
-          child: Form(
-            child: TextFormField(
-              cursorColor: Colors.blue,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                suffixIcon: Icon(Icons.search),
-                suffixIconColor: Colors.blue,
-              ),
-              style: const TextStyle(fontSize: 20),
-              cursorWidth: 1.5,
-            ),
-          ),
-        ),
         Expanded(
           child: ListView.builder(
             restorationId: 'classListView',
