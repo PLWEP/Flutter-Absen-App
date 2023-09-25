@@ -1,8 +1,8 @@
-import 'package:absen_app/src/models/course_class_item.dart';
+import 'package:absen_app/src/models/mata_kuliah.dart';
 import 'package:flutter/material.dart';
 
 class ItemDetailsView extends StatelessWidget {
-  final CourseClass item;
+  final MataKuliah item;
   const ItemDetailsView({
     super.key,
     required this.item,
@@ -49,30 +49,35 @@ class ItemDetailsView extends StatelessWidget {
           body: TabBarView(
             children: [
               ListView.builder(
-                itemCount: item.contents.length,
+                itemCount: item.konten.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final content = item.contents[index];
+                  final content = item.konten[index];
 
-                  return ListTile(
+                  return ExpansionTile(
                     title: Text(
-                      content.title,
+                      content.judul,
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    subtitle: Text(content.description),
+                    children: <Widget>[
+                      ListTile(
+                        title: Text(content.subJudul),
+                        subtitle: Text(content.deskripsi),
+                      ),
+                    ],
                   );
                 },
               ),
               ListView.builder(
-                itemCount: item.colleges.length,
+                itemCount: item.daftarMahasiswa.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final college = item.colleges[index];
+                  final college = item.daftarMahasiswa[index];
 
                   return ListTile(
                     title: Text(
-                      college.name,
+                      college.nama,
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -80,7 +85,9 @@ class ItemDetailsView extends StatelessWidget {
                     ),
                     subtitle: Text(college.nim),
                     leading: Icon(
-                      college.gender == "Male" ? Icons.male : Icons.female,
+                      college.jenisKelamin == "Male"
+                          ? Icons.male
+                          : Icons.female,
                     ),
                   );
                 },

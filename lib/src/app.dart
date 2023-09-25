@@ -1,4 +1,4 @@
-import 'package:absen_app/src/models/course_class_item.dart';
+import 'package:absen_app/src/models/mata_kuliah.dart';
 import 'package:absen_app/src/view/base_view.dart';
 import 'package:absen_app/src/widget/item_details_view.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
                   case ItemDetailsView.routeName:
                     return ItemDetailsView(
                       item: ModalRoute.of(context)?.settings.arguments
-                          as CourseClass,
+                          as MataKuliah,
                     );
                   default:
                     return BaseView(

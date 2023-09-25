@@ -1,8 +1,8 @@
-import 'package:absen_app/src/models/course_class_item.dart';
+import 'package:absen_app/src/models/mata_kuliah.dart';
 import 'package:flutter/material.dart';
 
 class ItemList extends StatelessWidget {
-  final CourseClass item;
+  final MataKuliah item;
   final Function() onTap;
   const ItemList({
     super.key,
@@ -72,7 +72,7 @@ class ItemList extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  "Jumlah Mahasiswa : ${item.totalColleges}",
+                  "Jumlah Mahasiswa : ${item.jumlahMahasiswa}",
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,

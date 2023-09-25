@@ -1,4 +1,4 @@
-import 'package:absen_app/src/models/course_class_item.dart';
+import 'package:absen_app/src/models/mata_kuliah.dart';
 import 'package:absen_app/src/widget/item_details_view.dart';
 import 'package:absen_app/src/widget/item_list.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ class HomeView extends StatelessWidget {
 
   static const routeName = '/';
 
-  final List<CourseClass> items = courseClasses;
+  final List<MataKuliah> items = courseClasses;
 
   @override
   Widget build(BuildContext context) {
