@@ -12,88 +12,90 @@ class ItemDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.blue.shade900,
-            title: Text(
-              "${item.name} ${item.id}",
-              style: const TextStyle(
-                fontSize: 15,
-              ),
-            ),
-            bottom: const TabBar(tabs: [
-              Tab(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.book),
-                    SizedBox(width: 6),
-                    Text('Content'),
-                  ],
+    return SafeArea(
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.blue.shade900,
+              title: Text(
+                "${item.name} ${item.id}",
+                style: const TextStyle(
+                  fontSize: 15,
                 ),
               ),
-              Tab(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.people),
-                    SizedBox(width: 6),
-                    Text('Colleges'),
-                  ],
-                ),
-              ),
-            ]),
-          ),
-          body: TabBarView(
-            children: [
-              ListView.builder(
-                itemCount: item.konten.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final content = item.konten[index];
-
-                  return ExpansionTile(
-                    title: Text(
-                      "Pertemuan ${index + 1}",
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    children: <Widget>[
-                      ListTile(
-                        title: Text(content.judul),
-                        subtitle: Text(content.deskripsi),
-                      ),
+              bottom: const TabBar(tabs: [
+                Tab(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.book),
+                      SizedBox(width: 6),
+                      Text('Content'),
                     ],
-                  );
-                },
-              ),
-              ListView.builder(
-                itemCount: item.daftarMahasiswa.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final college = item.daftarMahasiswa[index];
+                  ),
+                ),
+                Tab(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.people),
+                      SizedBox(width: 6),
+                      Text('Colleges'),
+                    ],
+                  ),
+                ),
+              ]),
+            ),
+            body: TabBarView(
+              children: [
+                ListView.builder(
+                  itemCount: item.konten.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final content = item.konten[index];
 
-                  return ListTile(
-                    title: Text(
-                      college.nama,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                    return ExpansionTile(
+                      title: Text(
+                        "Pertemuan ${index + 1}",
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    subtitle: Text(college.nim),
-                    leading: Icon(
-                      college.jenisKelamin == "Male"
-                          ? Icons.male
-                          : Icons.female,
-                    ),
-                  );
-                },
-              ),
-            ],
-          )),
+                      children: <Widget>[
+                        ListTile(
+                          title: Text(content.judul),
+                          subtitle: Text(content.deskripsi),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+                ListView.builder(
+                  itemCount: item.daftarMahasiswa.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final college = item.daftarMahasiswa[index];
+
+                    return ListTile(
+                      title: Text(
+                        college.nama,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(college.nim),
+                      leading: Icon(
+                        college.jenisKelamin == "Male"
+                            ? Icons.male
+                            : Icons.female,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            )),
+      ),
     );
   }
 }
