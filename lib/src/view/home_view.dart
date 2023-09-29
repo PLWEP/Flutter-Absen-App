@@ -14,29 +14,52 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            restorationId: 'classListView',
-            itemCount: items.length,
-            itemBuilder: (BuildContext context, int index) {
-              final item = items[index];
-
-              return ItemList(
-                item: item,
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    ItemDetailsView.routeName,
-                    arguments: item,
-                  );
-                },
-              );
-            },
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 86,
+        title: Text(
+          'Absen App',
+          style: TextStyle(
+            fontFamily: 'cursive',
+            fontSize: 40,
           ),
         ),
-      ],
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.notifications),
+          ),
+        ],
+        backgroundColor: const Color(0xFF0D47A1),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              restorationId: 'classListView',
+              itemCount: items.length,
+              itemBuilder: (BuildContext context, int index) {
+                final item = items[index];
+
+                return ItemList(
+                  item: item,
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      ItemDetailsView.routeName,
+                      arguments: item,
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
