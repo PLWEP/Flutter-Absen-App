@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
   final List<MataKuliah> items = daftarMataKuliah;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
     return Column(
       children: [
         Expanded(
