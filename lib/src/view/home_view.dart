@@ -17,7 +17,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 86,
-        title: Text(
+        title: const Text(
           'Absen App',
           style: TextStyle(
             fontFamily: 'cursive',
@@ -27,11 +27,11 @@ class HomeView extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
           ),
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
           ),
         ],
         backgroundColor: const Color(0xFF0D47A1),
