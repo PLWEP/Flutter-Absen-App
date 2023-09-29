@@ -4,6 +4,8 @@ import 'package:absen_app/src/models/mahasiswa.dart';
 class MataKuliah {
   String id;
   String name;
+  String dosen;
+  String jadwal;
   int sks;
   int jumlahMahasiswa;
   List<Mahasiswa> daftarMahasiswa;
@@ -11,6 +13,8 @@ class MataKuliah {
   MataKuliah({
     required this.id,
     required this.name,
+    required this.dosen,
+    required this.jadwal,
     required this.sks,
     required this.jumlahMahasiswa,
     required this.daftarMahasiswa,
@@ -20,6 +24,8 @@ class MataKuliah {
   MataKuliah copyWith({
     String? id,
     String? name,
+    String? dosen,
+    String? jadwal,
     int? sks,
     int? jumlahMahasiswa,
     List<Mahasiswa>? daftarMahasiswa,
@@ -28,6 +34,8 @@ class MataKuliah {
     return MataKuliah(
       id: id ?? this.id,
       name: name ?? this.name,
+      dosen: dosen ?? this.dosen,
+      jadwal: jadwal ?? this.jadwal,
       sks: sks ?? this.sks,
       jumlahMahasiswa: jumlahMahasiswa ?? this.jumlahMahasiswa,
       daftarMahasiswa: daftarMahasiswa ?? this.daftarMahasiswa,
@@ -50,6 +58,8 @@ class MataKuliah {
     return MataKuliah(
       id: map['id'] as String,
       name: map['name'] as String,
+      dosen: map['dosen'] as String,
+      jadwal: map['jadwal'] as String,
       sks: map['sks'] as int,
       jumlahMahasiswa: map['jumlahMahasiswa'] as int,
       daftarMahasiswa: List<Mahasiswa>.from(
@@ -70,6 +80,8 @@ List<MataKuliah> daftarMataKuliah = [
   MataKuliah(
     id: "A11.1234",
     name: "Kriptografi",
+    dosen: "Dr. Prof. Patrick",
+    jadwal: "Senin, 08.00 - 10.00",
     sks: 3,
     jumlahMahasiswa: 5,
     daftarMahasiswa: [
@@ -99,6 +111,8 @@ List<MataKuliah> daftarMataKuliah = [
   MataKuliah(
     id: "A11.5678",
     name: "Pemrograman Lanjut",
+    dosen: "Dr. Prof. Patrick",
+    jadwal: "Senin, 08.00 - 10.00",
     sks: 4,
     jumlahMahasiswa: 8,
     daftarMahasiswa: [

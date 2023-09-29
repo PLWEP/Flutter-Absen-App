@@ -16,7 +16,7 @@ class ItemList extends StatelessWidget {
       onTap: () => onTap(),
       child: Container(
         width: double.infinity,
-        height: 200,
+        height: 146,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           boxShadow: const [
@@ -29,7 +29,7 @@ class ItemList extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Colors.blue.shade900, Colors.blueAccent.shade200],
+            colors: [Color(0xFF0D47A1), Color(0xFFB6C6FF)],
           ),
         ),
         padding: const EdgeInsets.all(15),
@@ -45,42 +45,80 @@ class ItemList extends StatelessWidget {
                   item.id,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    // overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 Text(
                   item.name,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
-                    overflow: TextOverflow.ellipsis,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Jumlah SKS : ${item.sks}",
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                  ),
+                Row(
+                  children: [
+                    Icon(Icons.person_pin, color: Colors.white, size: 16),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      item.dosen,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  "Jumlah Mahasiswa : ${item.jumlahMahasiswa}",
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.access_time, color: Colors.white, size: 16),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      item.jadwal,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
+            // Column(
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     Text(
+            //       "Jumlah SKS : ${item.sks}",
+            //       style: const TextStyle(
+            //         color: Colors.white,
+            //         fontSize: 16,
+            //       ),
+            //     ),
+            //     const SizedBox(height: 10),
+            //     Text(
+            //       "Jumlah Mahasiswa : ${item.jumlahMahasiswa}",
+            //       style: const TextStyle(
+            //         color: Colors.white,
+            //         fontSize: 16,
+            //         overflow: TextOverflow.ellipsis,
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
