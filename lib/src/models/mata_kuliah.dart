@@ -75,8 +75,6 @@ class MataKuliah {
     );
   }
 }
-<<<<<<< HEAD
-=======
 
 List<MataKuliah> daftarMataKuliah = [
   MataKuliah(
@@ -133,4 +131,3 @@ List<MataKuliah> daftarMataKuliah = [
     ],
   ),
 ];
->>>>>>> ff795c19d5a90c851ae278041e944eeeba632a2e

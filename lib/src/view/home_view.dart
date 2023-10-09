@@ -1,5 +1,4 @@
 import 'package:absen_app/src/models/mata_kuliah.dart';
-import 'package:absen_app/src/models/data.dart';
 import 'package:absen_app/src/widget/item_details_view.dart';
 import 'package:absen_app/src/widget/item_list.dart';
 import 'package:flutter/material.dart';
