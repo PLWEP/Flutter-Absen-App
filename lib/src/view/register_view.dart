@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({
+class RegisterView extends StatefulWidget {
+  RegisterView({
     super.key,
   });
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<RegisterView> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _LoginViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,12 +34,12 @@ class _LoginViewState extends State<LoginView> {
               padding: const EdgeInsets.symmetric(horizontal: 50),
               child: Column(
                 children: [
-                  const Column(
+                  Column(
                     textDirection: TextDirection.ltr,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Log In',
+                      const Text(
+                        'Register',
                         style: TextStyle(
                           color: Color.fromRGBO(13, 71, 161, 1),
                           fontSize: 35,
@@ -47,20 +47,18 @@ class _LoginViewState extends State<LoginView> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      
                       const SizedBox(
-                        height: 35,
-
+                        height: 30,
                       ),
                       TextField(
                         textAlign: TextAlign.start,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xFF393939),
                           fontSize: 15,
                           fontFamily: 'Poppins-regular',
                           fontWeight: FontWeight.w400,
                         ),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Email',
                           contentPadding: EdgeInsets.only(left: 15),
                           labelStyle: TextStyle(
@@ -85,18 +83,18 @@ class _LoginViewState extends State<LoginView> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       TextField(
                         textAlign: TextAlign.start,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xFF393939),
                           fontSize: 15,
                           fontFamily: 'Poppins-regular',
                           fontWeight: FontWeight.w400,
                         ),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Password',
                           contentPadding: EdgeInsets.only(left: 15),
                           labelStyle: TextStyle(
@@ -121,55 +119,63 @@ class _LoginViewState extends State<LoginView> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 25,
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Color.fromRGBO(13, 71, 161, 1),
-                            )
+                      TextField(
+                        textAlign: TextAlign.start,
+                        style: const TextStyle(
+                          color: Color(0xFF393939),
+                          fontSize: 15,
+                          fontFamily: 'Poppins-regular',
+                          fontWeight: FontWeight.w400,
+                        ),
+                        decoration: const InputDecoration(
+                          labelText: 'Konfirmasi Password',
+                          contentPadding: EdgeInsets.only(left: 15),
+                          labelStyle: TextStyle(
+                            color: Color.fromRGBO(13, 71, 161, 1),
+                            fontSize: 15,
+                            fontFamily: 'Poppins-regular',
+                            fontWeight: FontWeight.w600,
                           ),
-                          width: 150,
-                          height: 56,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: Color(0xFF837E93),
                             ),
-                            child: const Text(
-                              'Register',
-                              style: TextStyle(
-                                color: Color.fromRGBO(13, 71, 161, 1),
-                                fontSize: 20,
-                                fontFamily: 'Poppins-bold',
-                                fontWeight: FontWeight.w500,
-                              ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: Color.fromRGBO(13, 71, 161, 1),
                             ),
                           ),
                         ),
                       ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
                       ClipRRect(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10)),
-                        child: Container(
-                          margin: EdgeInsets.only(left: 10),
+                        child: SizedBox(
                           width: 150,
                           height: 56,
                           child: ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromRGBO(13, 71, 161, 1),
+                              backgroundColor: Color.fromRGBO(13, 71, 161, 1),
                             ),
                             child: const Text(
-                              'Sign In',
+                              'Sign Up',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,

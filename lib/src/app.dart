@@ -1,5 +1,6 @@
 import 'package:absen_app/src/models/mata_kuliah.dart';
 import 'package:absen_app/src/view/base_view.dart';
+import 'package:absen_app/src/view/detail_pertemuan_view.dart';
 import 'package:absen_app/src/widget/item_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -46,6 +47,8 @@ class MyApp extends StatelessWidget {
                       item: ModalRoute.of(context)?.settings.arguments
                           as MataKuliah,
                     );
+                  case DetailPertemuanView.routeName:
+                    return DetailPertemuanView();
                   default:
                     return BaseView(
                       settingsController: settingsController,
