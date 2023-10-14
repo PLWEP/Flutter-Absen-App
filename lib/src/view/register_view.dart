@@ -5,6 +5,8 @@ class RegisterView extends StatefulWidget {
     super.key,
   });
 
+  static const routeName = '/register';
+
   @override
   State<RegisterView> createState() => _LoginViewState();
 }
@@ -22,7 +24,7 @@ class _LoginViewState extends State<RegisterView> {
               height: 200,
               foregroundDecoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('images/atas.png'),
+                  image: AssetImage('assets/atas.png'),
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -196,7 +198,7 @@ class _LoginViewState extends State<RegisterView> {
               height: 320,
               foregroundDecoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('images/bawah2.png'),
+                  image: AssetImage('assets/bawah2.png'),
                   fit: BoxFit.fitWidth,
                 ),
               ),

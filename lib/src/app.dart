@@ -1,6 +1,8 @@
 import 'package:absen_app/src/view/add_activity_view.dart';
 import 'package:absen_app/src/view/home_view.dart';
+import 'package:absen_app/src/view/login_view.dart';
 import 'package:absen_app/src/view/profile_view.dart';
+import 'package:absen_app/src/view/register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -36,8 +38,14 @@ class MyApp extends StatelessWidget {
                 return const AddActivityView();
               case ProfileView.routeName:
                 return const ProfileView();
-              default:
+              case LoginView.routeName:
+                return const LoginView();
+              case RegisterView.routeName:
+                return const RegisterView();
+              case HomeView.routeName:
                 return const HomeView();
+              default:
+                return const LoginView();
             }
           },
         );

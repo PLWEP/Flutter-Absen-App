@@ -5,7 +5,7 @@ class AddActivityView extends StatefulWidget {
     super.key,
   });
 
-  static const routeName = '/detail_pertemuan';
+  static const routeName = '/add_activity';
 
   @override
   _AddActivityViewState createState() => _AddActivityViewState();

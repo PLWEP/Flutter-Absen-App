@@ -1,9 +1,13 @@
+import 'package:absen_app/src/view/home_view.dart';
+import 'package:absen_app/src/view/register_view.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({
     super.key,
   });
+
+  static const routeName = '/login';
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -12,156 +16,134 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.white,
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               height: 200,
               foregroundDecoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('images/atas.png'),
+                  image: AssetImage('assets/atas.png'),
                   fit: BoxFit.fitWidth,
                 ),
               ),
             ),
-            const SizedBox(
-              height: 18,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
-              child: Column(
-                children: [
-                  const Column(
-                    textDirection: TextDirection.ltr,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Log In',
-                        style: TextStyle(
-                          color: Color.fromRGBO(13, 71, 161, 1),
-                          fontSize: 35,
-                          fontFamily: 'Poppins-bold',
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 35,
-                      ),
-                      TextField(
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Color(0xFF393939),
-                          fontSize: 15,
-                          fontFamily: 'Poppins-regular',
-                          fontWeight: FontWeight.w400,
-                        ),
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          contentPadding: EdgeInsets.only(left: 15),
-                          labelStyle: TextStyle(
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50),
+                child: Column(
+                  children: [
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Log In',
+                          style: TextStyle(
                             color: Color.fromRGBO(13, 71, 161, 1),
+                            fontSize: 35,
+                            fontFamily: 'Poppins-bold',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        TextField(
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: Color(0xFF393939),
                             fontSize: 15,
                             fontFamily: 'Poppins-regular',
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w400,
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              width: 1,
-                              color: Color(0xFF837E93),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              width: 1,
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            contentPadding: EdgeInsets.only(left: 15),
+                            labelStyle: TextStyle(
                               color: Color.fromRGBO(13, 71, 161, 1),
+                              fontSize: 15,
+                              fontFamily: 'Poppins-regular',
+                              fontWeight: FontWeight.w600,
                             ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      TextField(
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Color(0xFF393939),
-                          fontSize: 15,
-                          fontFamily: 'Poppins-regular',
-                          fontWeight: FontWeight.w400,
-                        ),
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          contentPadding: EdgeInsets.only(left: 15),
-                          labelStyle: TextStyle(
-                            color: Color.fromRGBO(13, 71, 161, 1),
-                            fontSize: 15,
-                            fontFamily: 'Poppins-regular',
-                            fontWeight: FontWeight.w600,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              width: 1,
-                              color: Color(0xFF837E93),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(
+                                width: 1,
+                                color: Color(0xFF837E93),
+                              ),
                             ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              width: 1,
-                              color: Color.fromRGBO(13, 71, 161, 1),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                            color: const Color.fromRGBO(13, 71, 161, 1),
-                          )),
-                          width: 150,
-                          height: 56,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                            ),
-                            child: const Text(
-                              'Register',
-                              style: TextStyle(
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(
+                                width: 1,
                                 color: Color.fromRGBO(13, 71, 161, 1),
-                                fontSize: 20,
-                                fontFamily: 'Poppins-bold',
-                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 10),
-                          width: 150,
-                          height: 56,
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextField(
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: Color(0xFF393939),
+                            fontSize: 15,
+                            fontFamily: 'Poppins-regular',
+                            fontWeight: FontWeight.w400,
+                          ),
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            contentPadding: EdgeInsets.only(left: 15),
+                            labelStyle: TextStyle(
+                              color: Color.fromRGBO(13, 71, 161, 1),
+                              fontSize: 15,
+                              fontFamily: 'Poppins-regular',
+                              fontWeight: FontWeight.w600,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(
+                                width: 1,
+                                color: Color(0xFF837E93),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(
+                                width: 1,
+                                color: Color.fromRGBO(13, 71, 161, 1),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 25,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 140,
+                          height: 50,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                HomeView.routeName,
+                                (route) => false,
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor:
                                   const Color.fromRGBO(13, 71, 161, 1),
@@ -177,17 +159,46 @@ class _LoginViewState extends State<LoginView> {
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: const Color.fromRGBO(13, 71, 161, 1),
+                            ),
+                          ),
+                          width: 140,
+                          height: 50,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                RegisterView.routeName,
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                            ),
+                            child: const Text(
+                              'Register',
+                              style: TextStyle(
+                                color: Color.fromRGBO(13, 71, 161, 1),
+                                fontSize: 20,
+                                fontFamily: 'Poppins-bold',
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             Container(
-              height: 320,
+              height: 250,
               foregroundDecoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('images/bawah2.png'),
+                  image: AssetImage('assets/bawah2.png'),
                   fit: BoxFit.fitWidth,
                 ),
               ),
