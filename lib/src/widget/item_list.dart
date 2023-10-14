@@ -26,7 +26,7 @@ class ItemList extends StatelessWidget {
               offset: Offset(5, 5),
             ),
           ],
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [Color(0xFF0D47A1), Color(0xFFB6C6FF)],
@@ -65,8 +65,8 @@ class ItemList extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.person_pin, color: Colors.white, size: 16),
-                    const SizedBox(
+                    Icon(Icons.person_pin, color: Colors.white, size: 16),
+                    SizedBox(
                       width: 5,
                     ),
                     Text(
@@ -78,14 +78,13 @@ class ItemList extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 10,
                 ),
                 Row(
                   children: [
-                    const Icon(Icons.access_time,
-                        color: Colors.white, size: 16),
-                    const SizedBox(
+                    Icon(Icons.access_time, color: Colors.white, size: 16),
+                    SizedBox(
                       width: 5,
                     ),
                     Text(

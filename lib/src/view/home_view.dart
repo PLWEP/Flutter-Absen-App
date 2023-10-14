@@ -16,36 +16,18 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 86,
-        title: Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  ProfileView.routeName,
-                );
-              },
-              child: const CircleAvatar(
-                radius: 20,
-                backgroundImage: AssetImage('assets/coba.png'),
-              ),
-            ),
-            const SizedBox(width: 10),
-            const Text(
-              'Hi Mahasiswa!',
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-          ],
+        title: Text(
+          'Absen App',
+          style: TextStyle(
+            fontFamily: 'cursive',
+            fontSize: 40,
+          ),
         ),
         actions: [
           IconButton(
             splashRadius: 20,
             onPressed: () {},
-            icon: const Icon(
-              Icons.notifications,
-            ),
+            icon: Icon(Icons.notifications),
           ),
         ],
         backgroundColor: const Color(0xFF0D47A1),

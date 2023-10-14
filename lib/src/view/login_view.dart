@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({
+  LoginView({
     super.key,
   });
 
@@ -34,11 +34,11 @@ class _LoginViewState extends State<LoginView> {
               padding: const EdgeInsets.symmetric(horizontal: 50),
               child: Column(
                 children: [
-                  const Column(
+                  Column(
                     textDirection: TextDirection.ltr,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Log In',
                         style: TextStyle(
                           color: Color.fromRGBO(13, 71, 161, 1),
@@ -47,20 +47,18 @@ class _LoginViewState extends State<LoginView> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      
                       const SizedBox(
                         height: 35,
-
                       ),
                       TextField(
                         textAlign: TextAlign.start,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xFF393939),
                           fontSize: 15,
                           fontFamily: 'Poppins-regular',
                           fontWeight: FontWeight.w400,
                         ),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Email',
                           contentPadding: EdgeInsets.only(left: 15),
                           labelStyle: TextStyle(
@@ -85,18 +83,18 @@ class _LoginViewState extends State<LoginView> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       TextField(
                         textAlign: TextAlign.start,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xFF393939),
                           fontSize: 15,
                           fontFamily: 'Poppins-regular',
                           fontWeight: FontWeight.w400,
                         ),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Password',
                           contentPadding: EdgeInsets.only(left: 15),
                           labelStyle: TextStyle(
@@ -121,7 +119,7 @@ class _LoginViewState extends State<LoginView> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 25,
                       ),
                     ],
@@ -165,8 +163,7 @@ class _LoginViewState extends State<LoginView> {
                           child: ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromRGBO(13, 71, 161, 1),
+                              backgroundColor: Color.fromRGBO(13, 71, 161, 1),
                             ),
                             child: const Text(
                               'Sign In',
