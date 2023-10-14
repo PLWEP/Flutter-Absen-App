@@ -41,8 +41,11 @@ class HomeView extends StatelessWidget {
         ),
         actions: [
           IconButton(
+            splashRadius: 20,
             onPressed: () {},
-            icon: const Icon(Icons.notifications),
+            icon: const Icon(
+              Icons.notifications,
+            ),
           ),
         ],
         backgroundColor: const Color(0xFF0D47A1),
