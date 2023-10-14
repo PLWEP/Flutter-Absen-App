@@ -1,4 +1,4 @@
-import 'package:absen_app/src/view/detail_pertemuan_view.dart';
+import 'package:absen_app/src/view/add_activity_view.dart';
 import 'package:absen_app/src/view/home_view.dart';
 import 'package:absen_app/src/view/profile_view.dart';
 import 'package:flutter/material.dart';
@@ -32,13 +32,8 @@ class MyApp extends StatelessWidget {
           settings: routeSettings,
           builder: (BuildContext context) {
             switch (routeSettings.name) {
-              // case ItemDetailsView.routeName:
-              //   return ItemDetailsView(
-              //     item:
-              //         ModalRoute.of(context)?.settings.arguments as MataKuliah,
-              //   );
-              case DetailPertemuanView.routeName:
-                return const DetailPertemuanView();
+              case AddActivityView.routeName:
+                return const AddActivityView();
               case ProfileView.routeName:
                 return const ProfileView();
               default:

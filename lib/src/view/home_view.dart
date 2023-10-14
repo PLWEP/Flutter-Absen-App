@@ -1,4 +1,4 @@
-import 'package:absen_app/src/view/detail_pertemuan_view.dart';
+import 'package:absen_app/src/view/add_activity_view.dart';
 import 'package:absen_app/src/view/profile_view.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +51,7 @@ class HomeView extends StatelessWidget {
           onPressed: () {
             Navigator.pushNamed(
               context,
-              DetailPertemuanView.routeName,
+              AddActivityView.routeName,
             );
           },
           child: const Icon(Icons.add),
