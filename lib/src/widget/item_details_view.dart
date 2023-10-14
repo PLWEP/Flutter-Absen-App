@@ -25,14 +25,14 @@ class ItemDetailsView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${item.name}",
+                    item.name,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(
-                    "${item.id}",
+                    item.id,
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w300,
@@ -87,7 +87,7 @@ class ItemDetailsView extends StatelessWidget {
                         // ),
 
                         Container(
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.pushNamed(
@@ -102,17 +102,17 @@ class ItemDetailsView extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               shadowColor: Colors.black,
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   content.deskripsi,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 12, color: Colors.black),
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.check_circle,
                                   color: Color(0xFFC1C1C1),
                                 )

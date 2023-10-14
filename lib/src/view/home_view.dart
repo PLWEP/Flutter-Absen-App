@@ -13,53 +13,71 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 86,
-        title: Text(
-          'Absen App',
-          style: TextStyle(
-            fontFamily: 'cursive',
-            fontSize: 40,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 86,
+          title: Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    ProfileView.routeName,
+                  );
+                },
+                child: const CircleAvatar(
+                  radius: 20,
+                  backgroundImage: AssetImage('assets/coba.png'),
+                ),
+              ),
+              const SizedBox(width: 10),
+              const Text(
+                'Hi Mahasiswa!',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ],
           ),
-        ),
-        actions: [
-          IconButton(
-            splashRadius: 20,
-            onPressed: () {},
-            icon: Icon(Icons.notifications),
-          ),
-        ],
-        backgroundColor: const Color(0xFF0D47A1),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              restorationId: 'classListView',
-              itemCount: items.length,
-              itemBuilder: (BuildContext context, int index) {
-                final item = items[index];
-
-                return ExpansionTile(
-                  title: Text(
-                    "Pertemuan ${index + 1}",
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  children: <Widget>[
-                    ListTile(
-                      title: Text(item.id),
-                      subtitle: Text(item.name),
-                    ),
-                  ],
-                );
-              },
+          actions: [
+            IconButton(
+              splashRadius: 20,
+              onPressed: () {},
+              icon: const Icon(Icons.notifications),
             ),
-          ),
-        ],
+          ],
+          backgroundColor: const Color(0xFF0D47A1),
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                restorationId: 'classListView',
+                itemCount: items.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final item = items[index];
+
+                  return ExpansionTile(
+                    title: Text(
+                      "Pertemuan ${index + 1}",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    children: <Widget>[
+                      ListTile(
+                        title: Text(item.id),
+                        subtitle: Text(item.name),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

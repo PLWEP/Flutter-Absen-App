@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DetailPertemuanView extends StatefulWidget {
-  DetailPertemuanView({
+  const DetailPertemuanView({
     super.key,
   });
 
@@ -21,8 +21,8 @@ class _DetailPertemuanViewState extends State<DetailPertemuanView> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: Color.fromRGBO(13, 71, 161, 1),
-        title: Column(
+        backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
+        title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
@@ -48,7 +48,7 @@ class _DetailPertemuanViewState extends State<DetailPertemuanView> {
         ),
         actions: [
           IconButton(
-            padding: EdgeInsets.only(right: 20),
+            padding: const EdgeInsets.only(right: 20),
             iconSize: 30,
             icon: const Icon(
               Icons.bookmark_border,
@@ -58,7 +58,7 @@ class _DetailPertemuanViewState extends State<DetailPertemuanView> {
           ),
         ],
         leading: IconButton(
-          padding: EdgeInsets.only(left: 20),
+          padding: const EdgeInsets.only(left: 20),
           icon: const Icon(
             Icons.arrow_back_ios,
             color: Colors.white,
@@ -69,19 +69,19 @@ class _DetailPertemuanViewState extends State<DetailPertemuanView> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.all(20),
-        margin: EdgeInsets.only(top: 40),
+        padding: const EdgeInsets.all(20),
+        margin: const EdgeInsets.only(top: 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Materi Pembelajaran',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Container(
@@ -95,7 +95,7 @@ class _DetailPertemuanViewState extends State<DetailPertemuanView> {
                 ),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 10),
@@ -116,21 +116,21 @@ class _DetailPertemuanViewState extends State<DetailPertemuanView> {
             ),
             Container(
               //dropdown hadir/izin
-              margin: EdgeInsets.only(top: 40),
+              margin: const EdgeInsets.only(top: 40),
               child: Column(
                 children: [
-                  Text(
+                  const Text(
                     'Kehadiran',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
@@ -143,8 +143,8 @@ class _DetailPertemuanViewState extends State<DetailPertemuanView> {
                         isExpanded: true,
                         value: value,
                         iconEnabledColor: Colors.black,
-                        hint: Text('Pilih Kehadiran'),
-                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        hint: const Text('Pilih Kehadiran'),
+                        icon: const Icon(Icons.arrow_drop_down_outlined),
                         iconSize: 30,
                         onChanged: (value) =>
                             setState(() => this.value = value),
@@ -154,7 +154,7 @@ class _DetailPertemuanViewState extends State<DetailPertemuanView> {
                   ),
                   Container(
                     //submit button,
-                    margin: EdgeInsets.only(top: 40),
+                    margin: const EdgeInsets.only(top: 40),
                     child: Column(
                       children: [
                         Container(
@@ -163,14 +163,15 @@ class _DetailPertemuanViewState extends State<DetailPertemuanView> {
                           child: ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromRGBO(13, 71, 161, 1),
+                              backgroundColor:
+                                  const Color.fromRGBO(13, 71, 161, 1),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               shadowColor: Colors.black,
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                             ),
-                            child: Text(
+                            child: const Text(
                               'Submit',
                               style: TextStyle(
                                 fontSize: 18,
@@ -195,7 +196,7 @@ class _DetailPertemuanViewState extends State<DetailPertemuanView> {
         value: item,
         child: Text(
           item,
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       );
 }

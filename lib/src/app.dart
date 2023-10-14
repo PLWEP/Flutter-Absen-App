@@ -1,5 +1,6 @@
 import 'package:absen_app/src/models/mata_kuliah.dart';
-import 'package:absen_app/src/view/base_view.dart';
+
+import 'package:absen_app/src/view/home_view.dart';
 import 'package:absen_app/src/view/profile_view.dart';
 import 'package:absen_app/src/widget/item_details_view.dart';
 import 'package:flutter/material.dart';
@@ -48,11 +49,9 @@ class MyApp extends StatelessWidget {
                           as MataKuliah,
                     );
                   case ProfileView.routeName:
-                    return ProfileView();
+                    return const ProfileView();
                   default:
-                    return BaseView(
-                      settingsController: settingsController,
-                    );
+                    return HomeView();
                 }
               },
             );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
-  LoginView({
+  const LoginView({
     super.key,
   });
 
@@ -34,11 +34,11 @@ class _LoginViewState extends State<LoginView> {
               padding: const EdgeInsets.symmetric(horizontal: 50),
               child: Column(
                 children: [
-                  Column(
+                  const Column(
                     textDirection: TextDirection.ltr,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Log In',
                         style: TextStyle(
                           color: Color.fromRGBO(13, 71, 161, 1),
@@ -47,18 +47,18 @@ class _LoginViewState extends State<LoginView> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 35,
                       ),
                       TextField(
                         textAlign: TextAlign.start,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Color(0xFF393939),
                           fontSize: 15,
                           fontFamily: 'Poppins-regular',
                           fontWeight: FontWeight.w400,
                         ),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: 'Email',
                           contentPadding: EdgeInsets.only(left: 15),
                           labelStyle: TextStyle(
@@ -83,18 +83,18 @@ class _LoginViewState extends State<LoginView> {
                           ),
                         ),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 20,
                       ),
                       TextField(
                         textAlign: TextAlign.start,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Color(0xFF393939),
                           fontSize: 15,
                           fontFamily: 'Poppins-regular',
                           fontWeight: FontWeight.w400,
                         ),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: 'Password',
                           contentPadding: EdgeInsets.only(left: 15),
                           labelStyle: TextStyle(
@@ -119,7 +119,7 @@ class _LoginViewState extends State<LoginView> {
                           ),
                         ),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 25,
                       ),
                     ],
@@ -127,13 +127,13 @@ class _LoginViewState extends State<LoginView> {
                   Row(
                     children: [
                       ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
                         child: Container(
                           decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Color.fromRGBO(13, 71, 161, 1),
-                            )
-                          ),
+                              border: Border.all(
+                            color: const Color.fromRGBO(13, 71, 161, 1),
+                          )),
                           width: 150,
                           height: 56,
                           child: ElevatedButton(
@@ -157,13 +157,14 @@ class _LoginViewState extends State<LoginView> {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10)),
                         child: Container(
-                          margin: EdgeInsets.only(left: 10),
+                          margin: const EdgeInsets.only(left: 10),
                           width: 150,
                           height: 56,
                           child: ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromRGBO(13, 71, 161, 1),
+                              backgroundColor:
+                                  const Color.fromRGBO(13, 71, 161, 1),
                             ),
                             child: const Text(
                               'Sign In',
