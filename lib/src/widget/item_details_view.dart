@@ -24,28 +24,30 @@ class ItemDetailsView extends StatelessWidget {
                   fontSize: 15,
                 ),
               ),
-              bottom: const TabBar(tabs: [
-                Tab(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.book),
-                      SizedBox(width: 6),
-                      Text('Content'),
-                    ],
+              bottom: const TabBar(
+                tabs: [
+                  Tab(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.book),
+                        SizedBox(width: 6),
+                        Text('Content'),
+                      ],
+                    ),
                   ),
-                ),
-                Tab(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.people),
-                      SizedBox(width: 6),
-                      Text('Colleges'),
-                    ],
+                  Tab(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.people),
+                        SizedBox(width: 6),
+                        Text('Colleges'),
+                      ],
+                    ),
                   ),
-                ),
-              ]),
+                ],
+              ),
             ),
             body: TabBarView(
               children: [
