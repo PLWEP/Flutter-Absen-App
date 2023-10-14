@@ -13,6 +13,7 @@ class DetailPertemuanView extends StatefulWidget {
 
 class _DetailPertemuanViewState extends State<DetailPertemuanView> {
   final items = ['Hadir', 'Izin'];
+  var date = DateTime.now();
 
   String? value;
 
@@ -20,62 +21,78 @@ class _DetailPertemuanViewState extends State<DetailPertemuanView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 80,
         backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
-        title: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(),
-            ),
-            Text(
-              'Pertemuan 1',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Text(
-              'Kontrak kuliah',
-              style: TextStyle(
-                fontSize: 12,
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            padding: const EdgeInsets.only(right: 20),
-            iconSize: 30,
-            icon: const Icon(
-              Icons.bookmark_border,
-              color: Colors.white,
-            ),
-            onPressed: () {},
+        title: const Text(
+          'Tambah Aktivitas',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
-        ],
-        leading: IconButton(
-          padding: const EdgeInsets.only(left: 20),
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
         ),
       ),
       body: Container(
         padding: const EdgeInsets.all(20),
-        margin: const EdgeInsets.only(top: 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Materi Pembelajaran',
+              'Tanggal',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            GestureDetector(
+              onTap: () => showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(2000),
+                lastDate: DateTime(2099),
+              ).then(
+                (value) {
+                  setState(() {
+                    if (value != null) {
+                      date = value;
+                    }
+                  });
+                },
+              ),
+              child: Container(
+                alignment: Alignment.center,
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(left: 10),
+                    ),
+                    const Icon(Icons.date_range),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      date.toString(),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            const Text(
+              'Kehadiran',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -85,105 +102,50 @@ class _DetailPertemuanViewState extends State<DetailPertemuanView> {
               height: 15,
             ),
             Container(
-              alignment: Alignment.center,
-              height: 50,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
-                //warna boder
+                borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: Colors.black,
                   width: 2,
                 ),
-                borderRadius: BorderRadius.circular(10),
               ),
-              child: const Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                  ),
-                  Icon(Icons.download),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Kontrak Kuliah.pdf',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  value: value,
+                  iconEnabledColor: Colors.black,
+                  hint: const Text('Pilih Kehadiran'),
+                  icon: const Icon(Icons.arrow_drop_down_outlined),
+                  iconSize: 30,
+                  onChanged: (value) => setState(() => this.value = value),
+                  items: items.map(buildMenuItem).toList(),
+                ),
               ),
             ),
-            Container(
-              //dropdown hadir/izin
-              margin: const EdgeInsets.only(top: 40),
-              child: Column(
-                children: [
-                  const Text(
-                    'Kehadiran',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
+            const SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  const SizedBox(
-                    height: 15,
+                  shadowColor: Colors.black,
+                  padding: const EdgeInsets.all(10),
+                ),
+                child: const Text(
+                  'Simpan',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 2,
-                      ),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        isExpanded: true,
-                        value: value,
-                        iconEnabledColor: Colors.black,
-                        hint: const Text('Pilih Kehadiran'),
-                        icon: const Icon(Icons.arrow_drop_down_outlined),
-                        iconSize: 30,
-                        onChanged: (value) =>
-                            setState(() => this.value = value),
-                        items: items.map(buildMenuItem).toList(),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    //submit button,
-                    margin: const EdgeInsets.only(top: 40),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          height: 50,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromRGBO(13, 71, 161, 1),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              shadowColor: Colors.black,
-                              padding: const EdgeInsets.all(10),
-                            ),
-                            child: const Text(
-                              'Submit',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                ),
               ),
             ),
           ],

@@ -1,19 +1,22 @@
 class Konten {
   String judul;
   String deskripsi;
+  DateTime tanggal;
   Konten({
     required this.judul,
     required this.deskripsi,
+    required this.tanggal,
   });
 
   Konten copyWith({
     String? judul,
-    String? subJudul,
     String? deskripsi,
+    DateTime? tanggal,
   }) {
     return Konten(
       judul: judul ?? this.judul,
       deskripsi: deskripsi ?? this.deskripsi,
+      tanggal: tanggal ?? this.tanggal,
     );
   }
 
@@ -21,6 +24,7 @@ class Konten {
     return <String, dynamic>{
       'judul': judul,
       'deskripsi': deskripsi,
+      'tanggal': tanggal.millisecondsSinceEpoch,
     };
   }
 
@@ -28,6 +32,7 @@ class Konten {
     return Konten(
       judul: map['judul'] as String,
       deskripsi: map['deskripsi'] as String,
+      tanggal: DateTime.fromMillisecondsSinceEpoch(map['tanggal'] as int),
     );
   }
 }

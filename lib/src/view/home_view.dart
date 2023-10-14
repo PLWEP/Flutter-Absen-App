@@ -1,15 +1,13 @@
-import 'package:absen_app/src/models/mata_kuliah.dart';
+import 'package:absen_app/src/view/detail_pertemuan_view.dart';
 import 'package:absen_app/src/view/profile_view.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
-  HomeView({
+  const HomeView({
     super.key,
   });
 
   static const routeName = '/';
-
-  final List<MataKuliah> items = daftarMataKuliah;
 
   @override
   Widget build(BuildContext context) {
@@ -49,28 +47,59 @@ class HomeView extends StatelessWidget {
           ],
           backgroundColor: const Color(0xFF0D47A1),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(
+              context,
+              DetailPertemuanView.routeName,
+            );
+          },
+          child: const Icon(Icons.add),
+        ),
         body: Column(
           children: [
             Expanded(
               child: ListView.builder(
                 restorationId: 'classListView',
-                itemCount: items.length,
+                itemCount: 2,
                 itemBuilder: (BuildContext context, int index) {
-                  final item = items[index];
-
                   return ExpansionTile(
-                    title: Text(
-                      "Pertemuan ${index + 1}",
-                      style: const TextStyle(
+                    title: const Text(
+                      "Rabu, 22 - 10 - 2023",
+                      style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    children: <Widget>[
-                      ListTile(
-                        title: Text(item.id),
-                        subtitle: Text(item.name),
-                      ),
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 5,
+                        ),
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Asistensi",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            SizedBox(height: 15),
+                            Text(
+                              "Mengajarkan web dasar dan studi kasus 1",
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                            Text("dokumentasi"),
+                          ],
+                        ),
+                      )
                     ],
                   );
                 },

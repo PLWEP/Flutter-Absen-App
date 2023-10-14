@@ -1,8 +1,6 @@
-import 'package:absen_app/src/models/mata_kuliah.dart';
-
+import 'package:absen_app/src/view/detail_pertemuan_view.dart';
 import 'package:absen_app/src/view/home_view.dart';
 import 'package:absen_app/src/view/profile_view.dart';
-import 'package:absen_app/src/widget/item_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -34,15 +32,17 @@ class MyApp extends StatelessWidget {
           settings: routeSettings,
           builder: (BuildContext context) {
             switch (routeSettings.name) {
-              case ItemDetailsView.routeName:
-                return ItemDetailsView(
-                  item:
-                      ModalRoute.of(context)?.settings.arguments as MataKuliah,
-                );
+              // case ItemDetailsView.routeName:
+              //   return ItemDetailsView(
+              //     item:
+              //         ModalRoute.of(context)?.settings.arguments as MataKuliah,
+              //   );
+              case DetailPertemuanView.routeName:
+                return const DetailPertemuanView();
               case ProfileView.routeName:
                 return const ProfileView();
               default:
-                return HomeView();
+                return const HomeView();
             }
           },
         );
