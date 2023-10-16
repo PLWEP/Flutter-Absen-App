@@ -1,4 +1,5 @@
 import 'package:absen_app/src/view/home_view.dart';
+import 'package:absen_app/src/widget/custom_layout.dart';
 import 'package:absen_app/src/widget/custom_text_input.dart';
 import 'package:flutter/material.dart';
 
@@ -15,19 +16,10 @@ class RegisterView extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 150,
-            foregroundDecoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/atas.png'),
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-          ),
-          Expanded(
+      body: Form(
+        key: formKey,
+        child: CustomLayout(
+          body: Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50),
               child: Column(
@@ -91,16 +83,7 @@ class RegisterView extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            height: 250,
-            foregroundDecoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/bawah2.png'),
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
