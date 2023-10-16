@@ -12,7 +12,6 @@ class AddActivityView extends StatefulWidget {
 }
 
 class _AddActivityViewState extends State<AddActivityView> {
-  final items = ['Hadir', 'Izin'];
   var date = DateTime.now();
 
   final formKey = GlobalKey<FormState>();
@@ -193,12 +192,4 @@ class _AddActivityViewState extends State<AddActivityView> {
       ),
     );
   }
-
-  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-        value: item,
-        child: Text(
-          item,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-      );
 }
