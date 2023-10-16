@@ -1,4 +1,5 @@
 import 'package:absen_app/src/view/home_view.dart';
+import 'package:absen_app/src/widget/custom_text_input.dart';
 import 'package:flutter/material.dart';
 
 class RegisterView extends StatelessWidget {
@@ -31,11 +32,11 @@ class RegisterView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 50),
               child: Column(
                 children: [
-                  Column(
+                  const Column(
                     textDirection: TextDirection.ltr,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Register',
                         style: TextStyle(
                           color: Color.fromRGBO(13, 71, 161, 1),
@@ -44,97 +45,19 @@ class RegisterView extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 30,
                       ),
-                      TextFormField(
-                        textAlign: TextAlign.start,
-                        decoration: const InputDecoration(
-                          labelText: "Email",
-                          labelStyle: TextStyle(
-                            color: Color.fromRGBO(13, 71, 161, 1),
-                            fontSize: 15,
-                            fontFamily: 'Poppins-regular',
-                            fontWeight: FontWeight.w600,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              width: 1,
-                              color: Color(0xFF837E93),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              width: 1,
-                              color: Color.fromRGBO(13, 71, 161, 1),
-                            ),
-                          ),
-                        ),
-                        cursorColor: Colors.black,
-                      ),
-                      const SizedBox(
+                      CustomTextInput(title: "Email"),
+                      SizedBox(
                         height: 15,
                       ),
-                      TextFormField(
-                        textAlign: TextAlign.start,
-                        decoration: const InputDecoration(
-                          labelText: "Password",
-                          labelStyle: TextStyle(
-                            color: Color.fromRGBO(13, 71, 161, 1),
-                            fontSize: 15,
-                            fontFamily: 'Poppins-regular',
-                            fontWeight: FontWeight.w600,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              width: 1,
-                              color: Color(0xFF837E93),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              width: 1,
-                              color: Color.fromRGBO(13, 71, 161, 1),
-                            ),
-                          ),
-                        ),
-                        cursorColor: Colors.black,
-                      ),
-                      const SizedBox(
+                      PasswordTextInput(title: "Password"),
+                      SizedBox(
                         height: 15,
                       ),
-                      TextFormField(
-                        textAlign: TextAlign.start,
-                        decoration: const InputDecoration(
-                          labelText: "Confirm Password",
-                          labelStyle: TextStyle(
-                            color: Color.fromRGBO(13, 71, 161, 1),
-                            fontSize: 15,
-                            fontFamily: 'Poppins-regular',
-                            fontWeight: FontWeight.w600,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              width: 1,
-                              color: Color(0xFF837E93),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              width: 1,
-                              color: Color.fromRGBO(13, 71, 161, 1),
-                            ),
-                          ),
-                        ),
-                        cursorColor: Colors.black,
-                      ),
-                      const SizedBox(
+                      PasswordTextInput(title: "Confirm Password"),
+                      SizedBox(
                         height: 25,
                       ),
                     ],
