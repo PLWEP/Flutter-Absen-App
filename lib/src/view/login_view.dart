@@ -22,7 +22,7 @@ class LoginView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 200,
+                height: 150,
                 foregroundDecoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/atas.png'),

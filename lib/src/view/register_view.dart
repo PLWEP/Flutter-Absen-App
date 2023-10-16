@@ -1,46 +1,41 @@
+import 'package:absen_app/src/view/home_view.dart';
 import 'package:flutter/material.dart';
 
-class RegisterView extends StatefulWidget {
-  const RegisterView({
+class RegisterView extends StatelessWidget {
+  RegisterView({
     super.key,
   });
 
   static const routeName = '/register';
+  final formKey = GlobalKey<FormState>();
 
-  @override
-  State<RegisterView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 200,
-              foregroundDecoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/atas.png'),
-                  fit: BoxFit.fitWidth,
-                ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 150,
+            foregroundDecoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/atas.png'),
+                fit: BoxFit.fitWidth,
               ),
             ),
-            const SizedBox(
-              height: 18,
-            ),
-            Padding(
+          ),
+          Expanded(
+            child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50),
               child: Column(
                 children: [
-                  const Column(
+                  Column(
                     textDirection: TextDirection.ltr,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Register',
                         style: TextStyle(
                           color: Color.fromRGBO(13, 71, 161, 1),
@@ -49,20 +44,13 @@ class _LoginViewState extends State<RegisterView> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
-                      TextField(
+                      TextFormField(
                         textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Color(0xFF393939),
-                          fontSize: 15,
-                          fontFamily: 'Poppins-regular',
-                          fontWeight: FontWeight.w400,
-                        ),
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          contentPadding: EdgeInsets.only(left: 15),
+                        decoration: const InputDecoration(
+                          labelText: "Email",
                           labelStyle: TextStyle(
                             color: Color.fromRGBO(13, 71, 161, 1),
                             fontSize: 15,
@@ -84,21 +72,15 @@ class _LoginViewState extends State<RegisterView> {
                             ),
                           ),
                         ),
+                        cursorColor: Colors.black,
                       ),
-                      SizedBox(
-                        height: 20,
+                      const SizedBox(
+                        height: 15,
                       ),
-                      TextField(
+                      TextFormField(
                         textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Color(0xFF393939),
-                          fontSize: 15,
-                          fontFamily: 'Poppins-regular',
-                          fontWeight: FontWeight.w400,
-                        ),
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          contentPadding: EdgeInsets.only(left: 15),
+                        decoration: const InputDecoration(
+                          labelText: "Password",
                           labelStyle: TextStyle(
                             color: Color.fromRGBO(13, 71, 161, 1),
                             fontSize: 15,
@@ -120,21 +102,15 @@ class _LoginViewState extends State<RegisterView> {
                             ),
                           ),
                         ),
+                        cursorColor: Colors.black,
                       ),
-                      SizedBox(
-                        height: 20,
+                      const SizedBox(
+                        height: 15,
                       ),
-                      TextField(
+                      TextFormField(
                         textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Color(0xFF393939),
-                          fontSize: 15,
-                          fontFamily: 'Poppins-regular',
-                          fontWeight: FontWeight.w400,
-                        ),
-                        decoration: InputDecoration(
-                          labelText: 'Konfirmasi Password',
-                          contentPadding: EdgeInsets.only(left: 15),
+                        decoration: const InputDecoration(
+                          labelText: "Confirm Password",
                           labelStyle: TextStyle(
                             color: Color.fromRGBO(13, 71, 161, 1),
                             fontSize: 15,
@@ -156,55 +132,52 @@ class _LoginViewState extends State<RegisterView> {
                             ),
                           ),
                         ),
+                        cursorColor: Colors.black,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 25,
                       ),
                     ],
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                        child: SizedBox(
-                          width: 150,
-                          height: 56,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromRGBO(13, 71, 161, 1),
-                            ),
-                            child: const Text(
-                              'Sign Up',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: 'Poppins-bold',
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          HomeView.routeName,
+                          (route) => false,
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
+                      ),
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'Poppins-bold',
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),
             ),
-            Container(
-              height: 320,
-              foregroundDecoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/bawah2.png'),
-                  fit: BoxFit.fitWidth,
-                ),
+          ),
+          Container(
+            height: 250,
+            foregroundDecoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/bawah2.png'),
+                fit: BoxFit.fitWidth,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
