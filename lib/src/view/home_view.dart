@@ -1,6 +1,8 @@
+import 'package:absen_app/src/models/data.dart';
 import 'package:absen_app/src/view/add_activity_view.dart';
 import 'package:absen_app/src/view/profile_view.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({
@@ -61,12 +63,13 @@ class HomeView extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 restorationId: 'classListView',
-                itemCount: 2,
+                itemCount: daftarMataKuliah.length,
                 itemBuilder: (BuildContext context, int index) {
+                  final item = daftarMataKuliah[index];
                   return ExpansionTile(
-                    title: const Text(
-                      "Rabu, 22 - 10 - 2023",
-                      style: TextStyle(
+                    title: Text(
+                      DateFormat.yMEd().format(item.tanggal).toString(),
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -78,25 +81,26 @@ class HomeView extends StatelessWidget {
                           horizontal: 15,
                           vertical: 5,
                         ),
-                        child: const Column(
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Asistensi",
-                              style: TextStyle(
+                              item.judul,
+                              style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
-                            SizedBox(height: 15),
+                            const SizedBox(height: 15),
                             Text(
-                              "Mengajarkan web dasar dan studi kasus 1",
-                              style: TextStyle(
+                              item.deskripsi,
+                              style: const TextStyle(
                                 fontSize: 15,
                               ),
                             ),
-                            Text("dokumentasi"),
+                            const SizedBox(height: 15),
+                            Image.network(item.dokumentasi),
                           ],
                         ),
                       )
