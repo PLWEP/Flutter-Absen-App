@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddActivityView extends StatefulWidget {
   const AddActivityView({
@@ -8,13 +11,15 @@ class AddActivityView extends StatefulWidget {
   static const routeName = '/add_activity';
 
   @override
-  _AddActivityViewState createState() => _AddActivityViewState();
+  State<AddActivityView> createState() => _AddActivityViewState();
 }
 
 class _AddActivityViewState extends State<AddActivityView> {
   var date = DateTime.now();
 
   final formKey = GlobalKey<FormState>();
+  final imagePicker = ImagePicker();
+  File? image;
 
   String? value;
 
@@ -162,6 +167,30 @@ class _AddActivityViewState extends State<AddActivityView> {
                   const SizedBox(
                     height: 15,
                   ),
+                  Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: image != null ? Colors.green : Colors.red,
+                    ),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        showPictureDialog();
+                      },
+                      child: const Center(
+                        child: Text(
+                          'Dokumentasi',
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   SizedBox(
                     width: double.infinity,
                     height: 50,
@@ -190,6 +219,61 @@ class _AddActivityViewState extends State<AddActivityView> {
           ),
         ],
       ),
+    );
+  }
+
+  // get from gallery
+  getFromGallery() async {
+    final pickedFile = await imagePicker.pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        image = File(pickedFile.path);
+      });
+    }
+  }
+
+  // get from camera
+  getFromCamera() async {
+    final pickedFile = await imagePicker.pickImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        image = File(pickedFile.path);
+      });
+    }
+  }
+
+  Future<void> showPictureDialog() async {
+    await showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: const Text('Pilih Metode'),
+          children: [
+            SimpleDialogOption(
+              onPressed: () {
+                getFromCamera();
+                Navigator.of(context).pop();
+              },
+              child: const Text('Buka Kamera'),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                getFromGallery();
+                Navigator.of(context).pop();
+              },
+              child: const Text('Buka Gallery'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
