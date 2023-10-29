@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class AddActivityView extends StatefulWidget {
   const AddActivityView({
@@ -15,7 +16,11 @@ class AddActivityView extends StatefulWidget {
 }
 
 class _AddActivityViewState extends State<AddActivityView> {
-  var date = DateTime.now();
+  var date = DateFormat.yMEd().format(DateTime.now());
+
+  final TextEditingController _judulController = TextEditingController();
+  final TextEditingController _deskripsiController = TextEditingController();
+  var calenderController = DateTime.now();
 
   final formKey = GlobalKey<FormState>();
   final imagePicker = ImagePicker();
@@ -63,7 +68,8 @@ class _AddActivityViewState extends State<AddActivityView> {
                       (value) {
                         setState(() {
                           if (value != null) {
-                            date = value;
+                            calenderController = value;
+                            date = DateFormat.yMEd().format(value);
                           }
                         });
                       },
@@ -112,6 +118,8 @@ class _AddActivityViewState extends State<AddActivityView> {
                     height: 15,
                   ),
                   TextFormField(
+                    controller: _judulController,
+                    validator: (value) => value!.isEmpty ? "Mohon diisi" : null,
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -125,6 +133,20 @@ class _AddActivityViewState extends State<AddActivityView> {
                         borderSide: const BorderSide(
                           width: 2,
                           color: Colors.black,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Colors.red,
+                        ),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Colors.red,
                         ),
                       ),
                     ),
@@ -144,6 +166,8 @@ class _AddActivityViewState extends State<AddActivityView> {
                     height: 15,
                   ),
                   TextFormField(
+                    controller: _deskripsiController,
+                    validator: (value) => value!.isEmpty ? "Mohon diisi" : null,
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -157,6 +181,20 @@ class _AddActivityViewState extends State<AddActivityView> {
                         borderSide: const BorderSide(
                           width: 2,
                           color: Colors.black,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Colors.red,
+                        ),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Colors.red,
                         ),
                       ),
                     ),
@@ -195,7 +233,19 @@ class _AddActivityViewState extends State<AddActivityView> {
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          if (image == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Masukan Gambar Dokumentasi'),
+                              ),
+                            );
+                          } else {
+                            Navigator.pop(context);
+                          }
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
                         shape: RoundedRectangleBorder(
