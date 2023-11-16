@@ -5,15 +5,23 @@ import 'package:absen_app/src/widget/custom_layout.dart';
 import 'package:absen_app/src/widget/custom_text_input.dart';
 import 'package:flutter/material.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   LoginView({
     super.key,
   });
 
+  static const routeName = '/login';
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  static const routeName = '/login';
+  bool isLoading = false;
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -92,18 +100,28 @@ class LoginView extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
+                            setState(() {
+                              isLoading = true;
+                            });
+
                             final result = await FirebaseHelper().register(
                               _emailController.text,
                               _passwordController.text,
                             );
 
                             if (result == "success") {
+                              setState(() {
+                                isLoading = false;
+                              });
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
                                 HomeView.routeName,
                                 (route) => false,
                               );
                             } else {
+                              setState(() {
+                                isLoading = false;
+                              });
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(result),
@@ -115,15 +133,17 @@ class LoginView extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
                         ),
-                        child: const Text(
-                          'Sign In',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontFamily: 'Poppins-bold',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        child: isLoading
+                            ? LinearProgressIndicator()
+                            : const Text(
+                                'Sign In',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Poppins-bold',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                       ),
                     ),
                   ],

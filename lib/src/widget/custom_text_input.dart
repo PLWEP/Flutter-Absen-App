@@ -28,6 +28,13 @@ class CustomTextInput extends StatelessWidget {
           fontFamily: 'Poppins-regular',
           fontWeight: FontWeight.w600,
         ),
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderSide: BorderSide(
+            width: 1,
+            color: Color(0xFF837E93),
+          ),
+        ),
         enabledBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(5)),
           borderSide: BorderSide(
