@@ -29,6 +29,7 @@ class LoginView extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,13 +38,13 @@ class LoginView extends StatelessWidget {
                           'Log In',
                           style: TextStyle(
                             color: Color.fromRGBO(13, 71, 161, 1),
-                            fontSize: 35,
+                            fontSize: 25,
                             fontFamily: 'Poppins-bold',
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         const SizedBox(
-                          height: 30,
+                          height: 10,
                         ),
                         CustomTextInput(
                           title: "Email",
@@ -61,84 +62,69 @@ class LoginView extends StatelessWidget {
                               value!.isEmpty ? "Please Fill The Field" : null,
                         ),
                         const SizedBox(
-                          height: 25,
+                          height: 15,
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: 140,
-                          height: 50,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                final result = await FirebaseHelper().register(
-                                  _emailController.text,
-                                  _passwordController.text,
-                                );
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          RegisterView.routeName,
+                        );
+                      },
+                      child: const Text(
+                        "Dont have an account? Register here",
+                        style: TextStyle(
+                          color: Color.fromRGBO(13, 71, 161, 1),
+                          fontSize: 13,
+                          fontFamily: 'Poppins-bold',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            final result = await FirebaseHelper().register(
+                              _emailController.text,
+                              _passwordController.text,
+                            );
 
-                                if (result == "success") {
-                                  Navigator.pushNamedAndRemoveUntil(
-                                    context,
-                                    HomeView.routeName,
-                                    (route) => false,
-                                  );
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(result),
-                                    ),
-                                  );
-                                }
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromRGBO(13, 71, 161, 1),
-                            ),
-                            child: const Text(
-                              'Sign In',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: 'Poppins-bold',
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: const Color.fromRGBO(13, 71, 161, 1),
-                            ),
-                          ),
-                          width: 140,
-                          height: 50,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(
+                            if (result == "success") {
+                              Navigator.pushNamedAndRemoveUntil(
                                 context,
-                                RegisterView.routeName,
+                                HomeView.routeName,
+                                (route) => false,
                               );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                            ),
-                            child: const Text(
-                              'Register',
-                              style: TextStyle(
-                                color: Color.fromRGBO(13, 71, 161, 1),
-                                fontSize: 20,
-                                fontFamily: 'Poppins-bold',
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(result),
+                                ),
+                              );
+                            }
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
+                        ),
+                        child: const Text(
+                          'Sign In',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontFamily: 'Poppins-bold',
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
