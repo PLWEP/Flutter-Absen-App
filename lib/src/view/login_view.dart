@@ -9,6 +9,9 @@ class LoginView extends StatelessWidget {
     super.key,
   });
 
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   static const routeName = '/login';
   final formKey = GlobalKey<FormState>();
 
@@ -26,10 +29,10 @@ class LoginView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 50),
                 child: Column(
                   children: [
-                    const Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Log In',
                           style: TextStyle(
                             color: Color.fromRGBO(13, 71, 161, 1),
@@ -38,15 +41,25 @@ class LoginView extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
-                        CustomTextInput(title: "Email"),
-                        SizedBox(
+                        CustomTextInput(
+                          title: "Email",
+                          controller: _emailController,
+                          validator: (value) =>
+                              value!.isEmpty ? "Please Fill The Field" : null,
+                        ),
+                        const SizedBox(
                           height: 15,
                         ),
-                        PasswordTextInput(title: "Password"),
-                        SizedBox(
+                        PasswordTextInput(
+                          title: "Password",
+                          controller: _passwordController,
+                          validator: (value) =>
+                              value!.isEmpty ? "Please Fill The Field" : null,
+                        ),
+                        const SizedBox(
                           height: 25,
                         ),
                       ],
