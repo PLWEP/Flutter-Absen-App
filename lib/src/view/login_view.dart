@@ -1,3 +1,4 @@
+import 'package:absen_app/src/helper/firebase_helper.dart';
 import 'package:absen_app/src/view/home_view.dart';
 import 'package:absen_app/src/view/register_view.dart';
 import 'package:absen_app/src/widget/custom_layout.dart';
@@ -13,7 +14,7 @@ class LoginView extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
 
   static const routeName = '/login';
-  final formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class LoginView extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: Form(
-          key: formKey,
+          key: _formKey,
           child: CustomLayout(
             body: Expanded(
               child: Padding(
@@ -71,12 +72,27 @@ class LoginView extends StatelessWidget {
                           width: 140,
                           height: 50,
                           child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                HomeView.routeName,
-                                (route) => false,
-                              );
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                final result = await FirebaseHelper().register(
+                                  _emailController.text,
+                                  _passwordController.text,
+                                );
+
+                                if (result == "success") {
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    HomeView.routeName,
+                                    (route) => false,
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(result),
+                                    ),
+                                  );
+                                }
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor:

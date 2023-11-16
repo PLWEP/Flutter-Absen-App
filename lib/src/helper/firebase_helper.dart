@@ -17,4 +17,21 @@ class FirebaseHelper {
       }
     }
   }
+
+  Future<String> login(String email, String password) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      return "success";
+    } catch (error) {
+      if (error is FirebaseAuthException) {
+        return error.code;
+      } else {
+        return "An error occurred";
+      }
+    }
+  }
 }
