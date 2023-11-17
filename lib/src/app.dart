@@ -39,13 +39,13 @@ class MyApp extends StatelessWidget {
               case ProfileView.routeName:
                 return const ProfileView();
               case LoginView.routeName:
-                return LoginView();
+                return const LoginView();
               case RegisterView.routeName:
                 return const RegisterView();
               case HomeView.routeName:
                 return const HomeView();
               default:
-                return LoginView();
+                return const LoginView();
             }
           },
         );

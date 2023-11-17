@@ -3,10 +3,12 @@ import 'package:absen_app/src/view/home_view.dart';
 import 'package:absen_app/src/view/register_view.dart';
 import 'package:absen_app/src/widget/custom_layout.dart';
 import 'package:absen_app/src/widget/custom_text_input.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
-  LoginView({
+  const LoginView({
     super.key,
   });
 
@@ -55,11 +57,17 @@ class _LoginViewState extends State<LoginView> {
                           height: 10,
                         ),
                         CustomTextInput(
-                          title: "Email",
-                          controller: _emailController,
-                          validator: (value) =>
-                              value!.isEmpty ? "Please Fill The Field" : null,
-                        ),
+                            title: "Email",
+                            controller: _emailController,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please Fill The Field";
+                              } else if (!EmailValidator.validate(value)) {
+                                return "Email is not valid";
+                              } else {
+                                return null;
+                              }
+                            }),
                         const SizedBox(
                           height: 15,
                         ),
@@ -104,7 +112,7 @@ class _LoginViewState extends State<LoginView> {
                               isLoading = true;
                             });
 
-                            final result = await FirebaseHelper().register(
+                            final result = await FirebaseHelper().login(
                               _emailController.text,
                               _passwordController.text,
                             );
@@ -134,7 +142,7 @@ class _LoginViewState extends State<LoginView> {
                           backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
                         ),
                         child: isLoading
-                            ? LinearProgressIndicator()
+                            ? const LinearProgressIndicator()
                             : const Text(
                                 'Sign In',
                                 style: TextStyle(
