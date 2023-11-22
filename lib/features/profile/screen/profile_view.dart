@@ -6,30 +6,8 @@ import 'package:routemaster/routemaster.dart';
 class ProfileView extends ConsumerWidget {
   const ProfileView({super.key});
 
-  showProfileDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return SimpleDialog(
-          children: [
-            SimpleDialogOption(
-              onPressed: () {
-                Routemaster.of(context).push('/photo');
-                Routemaster.of(context).pop();
-              },
-              child: const Text('Show Photo'),
-            ),
-            SimpleDialogOption(
-              onPressed: () {
-                Routemaster.of(context).pop();
-              },
-              child: const Text('Edit Photo'),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  void navigateToPhoto(BuildContext context) =>
+      Routemaster.of(context).push('/photo');
 
   void logOut(WidgetRef ref, BuildContext context) {
     ref.read(authControllerProvider.notifier).logout();
@@ -49,6 +27,7 @@ class ProfileView extends ConsumerWidget {
           children: [
             Expanded(
               child: Container(
+                padding: const EdgeInsets.all(10),
                 color: const Color.fromRGBO(13, 71, 161, 1),
                 width: double.infinity,
                 child: Center(
@@ -58,7 +37,7 @@ class ProfileView extends ConsumerWidget {
                       Column(
                         children: [
                           GestureDetector(
-                            onTap: () => showProfileDialog(context),
+                            onTap: () => navigateToPhoto(context),
                             child: Builder(builder: (context) {
                               if (user.profilePic == '') {
                                 return const CircleAvatar(

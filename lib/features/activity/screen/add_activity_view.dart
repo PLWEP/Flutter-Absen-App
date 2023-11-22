@@ -9,8 +9,6 @@ class AddActivityView extends StatefulWidget {
     super.key,
   });
 
-  static const routeName = '/add_activity';
-
   @override
   State<AddActivityView> createState() => _AddActivityViewState();
 }

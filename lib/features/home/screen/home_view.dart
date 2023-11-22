@@ -1,6 +1,5 @@
 import 'package:absen_app/features/auth/provider/auth_provider.dart';
 import 'package:absen_app/model/data.dart';
-import 'package:absen_app/src/view/add_activity_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -13,6 +12,9 @@ class HomeView extends ConsumerWidget {
 
   void navigateToProfile(BuildContext context) =>
       Routemaster.of(context).push('/profile');
+
+  void navigateToAddActivity(BuildContext context) =>
+      Routemaster.of(context).push('/add-activity');
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -60,12 +62,7 @@ class HomeView extends ConsumerWidget {
           backgroundColor: const Color(0xFF0D47A1),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(
-              context,
-              AddActivityView.routeName,
-            );
-          },
+          onPressed: () => navigateToAddActivity(context),
           child: const Icon(Icons.add),
         ),
         body: Column(

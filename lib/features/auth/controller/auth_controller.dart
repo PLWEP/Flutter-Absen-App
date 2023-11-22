@@ -17,7 +17,10 @@ class AuthController extends StateNotifier<bool> {
   Stream<User?> get authStateChange => _authRepository.authStateChange;
 
   void signInWithEmail(
-      BuildContext context, String email, String password) async {
+    BuildContext context,
+    String email,
+    String password,
+  ) async {
     state = true;
     final user = await _authRepository.signInWithEmail(email, password);
     state = false;
@@ -29,7 +32,10 @@ class AuthController extends StateNotifier<bool> {
   }
 
   void registerWithEmail(
-      BuildContext context, String email, String password) async {
+    BuildContext context,
+    String email,
+    String password,
+  ) async {
     state = true;
     final user = await _authRepository.registerWithEmail(email, password);
     state = false;

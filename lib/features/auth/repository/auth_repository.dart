@@ -31,18 +31,7 @@ class AuthRepository {
         password: password,
       );
 
-      UserModel userModel;
-
-      if (userCredential.additionalUserInfo!.isNewUser) {
-        userModel = UserModel(
-          name: userCredential.user!.displayName ?? 'Anonim',
-          profilePic: userCredential.user!.photoURL ?? Constants.avatarDefault,
-          uid: userCredential.user!.uid,
-        );
-        await _users.doc(userCredential.user!.uid).set(userModel.toMap());
-      } else {
-        userModel = await getUserData(userCredential.user!.uid).first;
-      }
+      UserModel userModel = await getUserData(userCredential.user!.uid).first;
 
       return right(userModel);
     } on FirebaseException catch (e) {

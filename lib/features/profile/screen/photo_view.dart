@@ -12,23 +12,25 @@ class PhotoView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
-    return Scaffold(
-      backgroundColor: Colors.black87,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => backToProfle(context),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.black87,
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => backToProfle(context),
+          ),
+          backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
+          title: const Text("Profile"),
         ),
-        backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
-        title: const Text("Profile"),
-      ),
-      body: Center(
-        child: Builder(builder: (context) {
-          if (user.profilePic == '') {
-            return Image.asset('assets/profile.jpeg');
-          } else {}
-          return Image.network(user.profilePic);
-        }),
+        body: Center(
+          child: Builder(builder: (context) {
+            if (user.profilePic == '') {
+              return Image.asset('assets/profile.jpeg');
+            } else {}
+            return Image.network(user.profilePic);
+          }),
+        ),
       ),
     );
   }
