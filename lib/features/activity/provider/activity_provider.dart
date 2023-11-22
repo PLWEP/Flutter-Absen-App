@@ -4,9 +4,8 @@ import 'package:absen_app/features/activity/controller/activity_controller.dart'
 import 'package:absen_app/features/activity/repository/activity_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final userActivityProvider = StreamProvider.family(
-  (ref, String uid) =>
-      ref.watch(activityControllerProvider.notifier).fetchUserActivity(uid),
+final userActivityProvider = StreamProvider(
+  (ref) => ref.watch(activityControllerProvider.notifier).fetchUserActivity(),
 );
 
 final activityControllerProvider =

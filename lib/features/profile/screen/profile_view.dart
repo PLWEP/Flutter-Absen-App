@@ -1,3 +1,4 @@
+import 'package:absen_app/common/constants.dart';
 import 'package:absen_app/features/auth/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,7 +21,7 @@ class ProfileView extends ConsumerWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
+          backgroundColor: Constants.defaultColor,
           title: const Text("Profile"),
         ),
         body: Column(
@@ -28,7 +29,7 @@ class ProfileView extends ConsumerWidget {
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(10),
-                color: const Color.fromRGBO(13, 71, 161, 1),
+                color: Constants.defaultColor,
                 width: double.infinity,
                 child: Center(
                   child: Column(
@@ -43,7 +44,7 @@ class ProfileView extends ConsumerWidget {
                                 return const CircleAvatar(
                                   radius: 60,
                                   backgroundImage:
-                                      AssetImage('assets/profile.jpeg'),
+                                      AssetImage(Constants.defaultAvatar),
                                 );
                               } else {}
                               return CircleAvatar(

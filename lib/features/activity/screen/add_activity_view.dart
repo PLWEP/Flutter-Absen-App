@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:absen_app/common/constants.dart';
 import 'package:absen_app/common/widget/loader.dart';
 import 'package:absen_app/features/activity/provider/activity_provider.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,7 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
     final isLoading = ref.watch(activityControllerProvider);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
+        backgroundColor: Constants.defaultColor,
         title: const Text(
           'Add Activity',
           style: TextStyle(

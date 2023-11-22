@@ -65,7 +65,8 @@ class ActivityController extends StateNotifier<bool> {
     );
   }
 
-  Stream<List<Activity>> fetchUserActivity(String uid) {
+  Stream<List<Activity>> fetchUserActivity() {
+    final uid = _ref.read(userProvider)!.uid;
     return _activityRepository.fetchUserActivity(uid);
   }
 

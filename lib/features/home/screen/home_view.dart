@@ -2,9 +2,9 @@ import 'package:absen_app/common/widget/error_text.dart';
 import 'package:absen_app/common/widget/loader.dart';
 import 'package:absen_app/features/activity/provider/activity_provider.dart';
 import 'package:absen_app/features/auth/provider/auth_provider.dart';
+import 'package:absen_app/features/home/widget/activity_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:routemaster/routemaster.dart';
 
 class HomeView extends ConsumerWidget {
@@ -25,7 +25,7 @@ class HomeView extends ConsumerWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 86,
+          toolbarHeight: 80,
           title: Row(
             children: [
               GestureDetector(
@@ -73,54 +73,14 @@ class HomeView extends ConsumerWidget {
           children: [
             isLoading
                 ? const Loader()
-                : ref.watch(userActivityProvider(user.uid)).when(
+                : ref.watch(userActivityProvider).when(
                       data: (data) => Expanded(
                         child: ListView.builder(
                           restorationId: 'classListView',
                           itemCount: data.length,
                           itemBuilder: (BuildContext context, int index) {
                             final item = data[index];
-                            return ExpansionTile(
-                              title: Text(
-                                DateFormat.yMEd().format(item.date).toString(),
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              children: [
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 15,
-                                    vertical: 5,
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        item.title,
-                                        style: const TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w800,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 15),
-                                      Text(
-                                        item.description,
-                                        style: const TextStyle(
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 15),
-                                      Image.network(item.documentation),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            );
+                            return ActivityCard(item: item);
                           },
                         ),
                       ),

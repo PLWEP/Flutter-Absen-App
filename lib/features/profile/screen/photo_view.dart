@@ -1,3 +1,4 @@
+import 'package:absen_app/common/constants.dart';
 import 'package:absen_app/features/auth/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,13 +21,13 @@ class PhotoView extends ConsumerWidget {
             icon: const Icon(Icons.arrow_back),
             onPressed: () => backToProfle(context),
           ),
-          backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
+          backgroundColor: Constants.defaultColor,
           title: const Text("Profile"),
         ),
         body: Center(
           child: Builder(builder: (context) {
             if (user.profilePic == '') {
-              return Image.asset('assets/profile.jpeg');
+              return Image.asset(Constants.defaultAvatar);
             } else {}
             return Image.network(user.profilePic);
           }),
