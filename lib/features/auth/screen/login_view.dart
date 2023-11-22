@@ -1,33 +1,43 @@
-import 'package:absen_app/src/helper/firebase_helper.dart';
-import 'package:absen_app/src/view/home_view.dart';
-import 'package:absen_app/src/view/register_view.dart';
+import 'package:absen_app/common/loader.dart';
+import 'package:absen_app/features/auth/provider/auth_provider.dart';
 import 'package:absen_app/src/widget/custom_layout.dart';
 import 'package:absen_app/src/widget/custom_text_input.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({
-    super.key,
-  });
-
-  static const routeName = '/login';
+class LoginView extends ConsumerStatefulWidget {
+  const LoginView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _LoginViewState extends ConsumerState<LoginView> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  bool isLoading = false;
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
 
   final _formKey = GlobalKey<FormState>();
 
+  void navigateToRegister() => Routemaster.of(context).push('/register');
+
+  void login() => ref.read(authControllerProvider.notifier).signInWithEmail(
+        context,
+        _emailController.text.trim(),
+        _passwordController.text.trim(),
+      );
+
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(authControllerProvider);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -53,12 +63,11 @@ class _LoginViewState extends State<LoginView> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        const SizedBox(height: 10),
                         CustomTextInput(
                             title: "Email",
                             controller: _emailController,
+                            enabled: isLoading ? false : true,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please Fill The Field";
@@ -68,12 +77,11 @@ class _LoginViewState extends State<LoginView> {
                                 return null;
                               }
                             }),
-                        const SizedBox(
-                          height: 15,
-                        ),
+                        const SizedBox(height: 15),
                         PasswordTextInput(
                           title: "Password",
                           controller: _passwordController,
+                          enabled: isLoading ? false : true,
                           validator: (value) =>
                               value!.isEmpty ? "Please Fill The Field" : null,
                         ),
@@ -83,12 +91,7 @@ class _LoginViewState extends State<LoginView> {
                       ],
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          RegisterView.routeName,
-                        );
-                      },
+                      onTap: () => navigateToRegister(),
                       child: const Text(
                         "Dont have an account? Register here",
                         style: TextStyle(
@@ -99,50 +102,21 @@ class _LoginViewState extends State<LoginView> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
                     SizedBox(
                       width: double.infinity,
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            setState(() {
-                              isLoading = true;
-                            });
-
-                            final result = await FirebaseHelper().login(
-                              _emailController.text,
-                              _passwordController.text,
-                            );
-
-                            if (result == "success") {
-                              setState(() {
-                                isLoading = false;
-                              });
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                HomeView.routeName,
-                                (route) => false,
-                              );
-                            } else {
-                              setState(() {
-                                isLoading = false;
-                              });
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(result),
-                                ),
-                              );
-                            }
+                            login();
                           }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
                         ),
                         child: isLoading
-                            ? const LinearProgressIndicator()
+                            ? const Loader()
                             : const Text(
                                 'Sign In',
                                 style: TextStyle(

@@ -5,12 +5,14 @@ class CustomTextInput extends StatelessWidget {
   final bool obsecure;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final bool enabled;
   const CustomTextInput({
     super.key,
     required this.title,
     this.obsecure = false,
     required this.controller,
     required this.validator,
+    required this.enabled,
   });
 
   @override
@@ -19,6 +21,7 @@ class CustomTextInput extends StatelessWidget {
       validator: validator,
       controller: controller,
       obscureText: obsecure,
+      enabled: enabled,
       textAlign: TextAlign.start,
       decoration: InputDecoration(
         labelText: title,
@@ -68,6 +71,7 @@ class PasswordTextInput extends CustomTextInput {
     required super.title,
     required super.controller,
     required super.validator,
+    required super.enabled,
     super.obsecure = true,
   });
 }
