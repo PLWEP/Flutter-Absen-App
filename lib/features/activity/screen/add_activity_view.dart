@@ -249,7 +249,9 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                             );
                           } else {
                             addActivity();
-                            // Navigator.pop(context);
+                            if (isLoading == false) {
+                              Navigator.pop(context);
+                            }
                           }
                         }
                       },

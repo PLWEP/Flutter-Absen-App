@@ -11,7 +11,7 @@ class ErrorText extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.error),
+          const Icon(Icons.error),
           Text(error),
         ],
       ),

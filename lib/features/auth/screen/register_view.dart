@@ -38,7 +38,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
           _emailController.text.trim(),
           _passwordController.text.trim(),
         );
-    Routemaster.of(context).pop();
   }
 
   @override
@@ -142,6 +141,9 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               register();
+                              if (isLoading == false) {
+                                Routemaster.of(context).pop();
+                              }
                             }
                           },
                           style: ElevatedButton.styleFrom(
