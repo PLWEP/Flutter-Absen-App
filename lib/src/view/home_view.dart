@@ -1,4 +1,4 @@
-import 'package:absen_app/src/models/data.dart';
+import 'package:absen_app/model/data.dart';
 import 'package:absen_app/src/view/add_activity_view.dart';
 import 'package:absen_app/src/view/profile_view.dart';
 import 'package:flutter/material.dart';

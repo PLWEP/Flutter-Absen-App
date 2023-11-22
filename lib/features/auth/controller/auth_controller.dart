@@ -5,7 +5,6 @@ import 'package:absen_app/common/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:routemaster/routemaster.dart';
 
 class AuthController extends StateNotifier<bool> {
   final AuthRepository _authRepository;

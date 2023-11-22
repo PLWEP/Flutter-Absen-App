@@ -1,5 +1,5 @@
-import 'package:absen_app/common/error_text.dart';
-import 'package:absen_app/common/loader.dart';
+import 'package:absen_app/common/widget/error_text.dart';
+import 'package:absen_app/common/widget/loader.dart';
 import 'package:absen_app/features/auth/provider/auth_provider.dart';
 import 'package:absen_app/model/user_model.dart';
 import 'package:absen_app/router.dart';

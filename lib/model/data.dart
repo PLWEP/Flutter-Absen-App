@@ -1,4 +1,4 @@
-import 'package:absen_app/src/models/konten.dart';
+import 'package:absen_app/model/konten.dart';
 
 List<Konten> daftarMataKuliah = [
   Konten(
