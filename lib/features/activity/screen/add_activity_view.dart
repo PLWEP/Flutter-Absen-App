@@ -1,38 +1,54 @@
 import 'dart:io';
 
+import 'package:absen_app/common/widget/loader.dart';
+import 'package:absen_app/features/activity/provider/activity_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-class AddActivityView extends StatefulWidget {
-  const AddActivityView({
-    super.key,
-  });
+class AddActivityView extends ConsumerStatefulWidget {
+  const AddActivityView({super.key});
 
   @override
-  State<AddActivityView> createState() => _AddActivityViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _AddActivityViewState();
 }
 
-class _AddActivityViewState extends State<AddActivityView> {
-  var date = DateFormat.yMEd().format(DateTime.now());
+class _AddActivityViewState extends ConsumerState<AddActivityView> {
+  var date = DateTime.now();
 
-  final TextEditingController _judulController = TextEditingController();
-  final TextEditingController _deskripsiController = TextEditingController();
-  var calenderController = DateTime.now();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
   final imagePicker = ImagePicker();
   File? image;
 
-  String? value;
+  @override
+  void dispose() {
+    super.dispose();
+    _titleController.dispose();
+    _descriptionController.dispose();
+  }
+
+  void addActivity() =>
+      ref.read(activityControllerProvider.notifier).addActivity(
+            context: context,
+            title: _titleController.text.trim(),
+            description: _descriptionController.text.trim(),
+            date: date,
+            file: image!,
+          );
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(activityControllerProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
         title: const Text(
-          'Tambah Aktivitas',
+          'Add Activity',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -49,7 +65,7 @@ class _AddActivityViewState extends State<AddActivityView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Tanggal',
+                    'Date',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -59,15 +75,14 @@ class _AddActivityViewState extends State<AddActivityView> {
                   GestureDetector(
                     onTap: () => showDatePicker(
                       context: context,
-                      initialDate: DateTime.now(),
+                      initialDate: date,
                       firstDate: DateTime(2000),
                       lastDate: DateTime(2099),
                     ).then(
                       (value) {
                         setState(() {
                           if (value != null) {
-                            calenderController = value;
-                            date = DateFormat.yMEd().format(value);
+                            date = value;
                           }
                         });
                       },
@@ -92,7 +107,7 @@ class _AddActivityViewState extends State<AddActivityView> {
                             width: 10,
                           ),
                           Text(
-                            date.toString(),
+                            DateFormat.yMEd().format(date).toString(),
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -102,22 +117,19 @@ class _AddActivityViewState extends State<AddActivityView> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 15),
                   const Text(
-                    'Judul',
+                    'Title',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 15),
                   TextFormField(
-                    controller: _judulController,
-                    validator: (value) => value!.isEmpty ? "Mohon diisi" : null,
+                    controller: _titleController,
+                    validator: (value) =>
+                        value!.isEmpty ? "Please Fill The Field" : null,
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -150,11 +162,9 @@ class _AddActivityViewState extends State<AddActivityView> {
                     ),
                     cursorColor: Colors.black,
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 15),
                   const Text(
-                    'Deskripsi',
+                    'Description',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -164,8 +174,9 @@ class _AddActivityViewState extends State<AddActivityView> {
                     height: 15,
                   ),
                   TextFormField(
-                    controller: _deskripsiController,
-                    validator: (value) => value!.isEmpty ? "Mohon diisi" : null,
+                    controller: _descriptionController,
+                    validator: (value) =>
+                        value!.isEmpty ? "Please Fill The Field" : null,
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -200,9 +211,7 @@ class _AddActivityViewState extends State<AddActivityView> {
                     maxLines: 5,
                     cursorColor: Colors.black,
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 15),
                   Container(
                     height: 50,
                     decoration: BoxDecoration(
@@ -217,16 +226,14 @@ class _AddActivityViewState extends State<AddActivityView> {
                       },
                       child: const Center(
                         child: Text(
-                          'Dokumentasi',
+                          'Documentation',
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 15),
                   SizedBox(
                     width: double.infinity,
                     height: 50,
@@ -236,11 +243,12 @@ class _AddActivityViewState extends State<AddActivityView> {
                           if (image == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text('Masukan Gambar Dokumentasi'),
+                                content: Text('Please input image'),
                               ),
                             );
                           } else {
-                            Navigator.pop(context);
+                            addActivity();
+                            // Navigator.pop(context);
                           }
                         }
                       },
@@ -252,13 +260,15 @@ class _AddActivityViewState extends State<AddActivityView> {
                         shadowColor: Colors.black,
                         padding: const EdgeInsets.all(10),
                       ),
-                      child: const Text(
-                        'Simpan',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child: isLoading
+                          ? const Loader()
+                          : const Text(
+                              'Save',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                     ),
                   ),
                 ],
