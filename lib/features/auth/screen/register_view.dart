@@ -32,12 +32,14 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
 
   void backToLogin(BuildContext context) => Routemaster.of(context).pop();
 
-  void register() =>
-      ref.read(authControllerProvider.notifier).registerWithEmail(
-            context,
-            _emailController.text.trim(),
-            _passwordController.text.trim(),
-          );
+  void register() {
+    ref.read(authControllerProvider.notifier).registerWithEmail(
+          context,
+          _emailController.text.trim(),
+          _passwordController.text.trim(),
+        );
+    Routemaster.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +137,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       const SizedBox(height: 10),
                       SizedBox(
                         width: double.infinity,
-                        height: 40,
+                        height: 50,
                         child: ElevatedButton(
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
@@ -152,7 +154,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                                   'Sign Up',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 15,
+                                    fontSize: 20,
                                     fontFamily: 'Poppins-bold',
                                     fontWeight: FontWeight.w500,
                                   ),

@@ -1,16 +1,22 @@
+import 'package:absen_app/features/auth/provider/auth_provider.dart';
 import 'package:absen_app/model/data.dart';
 import 'package:absen_app/src/view/add_activity_view.dart';
-import 'package:absen_app/src/view/profile_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:routemaster/routemaster.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends ConsumerWidget {
   const HomeView({
     super.key,
   });
 
+  void navigateToProfile(BuildContext context) =>
+      Routemaster.of(context).push('/profile');
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userProvider)!;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -18,22 +24,28 @@ class HomeView extends StatelessWidget {
           title: Row(
             children: [
               GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    ProfileView.routeName,
+                onTap: () => navigateToProfile(context),
+                child: Builder(builder: (context) {
+                  if (user.profilePic == '') {
+                    return const CircleAvatar(
+                      radius: 20,
+                      backgroundImage: AssetImage('assets/profile.jpeg'),
+                    );
+                  } else {}
+                  return CircleAvatar(
+                    radius: 20,
+                    backgroundImage: NetworkImage(user.profilePic),
                   );
-                },
-                child: const CircleAvatar(
-                  radius: 20,
-                  backgroundImage: AssetImage('assets/coba.png'),
-                ),
+                }),
               ),
               const SizedBox(width: 10),
-              const Text(
-                'Hi Mahasiswa!',
-                style: TextStyle(
-                  fontSize: 20,
+              Expanded(
+                child: Text(
+                  'Hi ${user.name}!',
+                  style: const TextStyle(
+                    overflow: TextOverflow.fade,
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ],
