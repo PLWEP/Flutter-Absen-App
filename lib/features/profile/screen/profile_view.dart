@@ -46,7 +46,7 @@ class ProfileView extends ConsumerWidget {
                                   backgroundImage:
                                       AssetImage(Constants.defaultAvatar),
                                 );
-                              } else {}
+                              }
                               return CircleAvatar(
                                 radius: 60,
                                 backgroundImage: NetworkImage(user.profilePic),
@@ -90,13 +90,6 @@ class ProfileView extends ConsumerWidget {
                           trailing: const Icon(Icons.navigate_next),
                           title: const Text("Edit Profile"),
                           leading: const Icon(Icons.person),
-                          iconColor: Colors.black,
-                          onTap: () {},
-                        ),
-                        ListTile(
-                          trailing: const Icon(Icons.navigate_next),
-                          title: const Text("Change Password"),
-                          leading: const Icon(Icons.lock),
                           iconColor: Colors.black,
                           onTap: () {},
                         ),

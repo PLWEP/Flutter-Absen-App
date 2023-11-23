@@ -28,7 +28,7 @@ class PhotoView extends ConsumerWidget {
           child: Builder(builder: (context) {
             if (user.profilePic == '') {
               return Image.asset(Constants.defaultAvatar);
-            } else {}
+            }
             return Image.network(user.profilePic);
           }),
         ),
