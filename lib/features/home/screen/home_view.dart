@@ -59,7 +59,7 @@ class HomeView extends ConsumerWidget {
             IconButton(
               splashRadius: 20,
               onPressed: () {},
-              icon: const Icon(Icons.notifications),
+              icon: const Icon(Icons.picture_as_pdf),
             ),
           ],
           backgroundColor: const Color(0xFF0D47A1),

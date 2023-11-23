@@ -45,13 +45,14 @@ class ActivityCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
-              CachedNetworkImage(
-                imageUrl: item.documentation,
-                height: 200,
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    const Loader(),
-                errorWidget: (context, url, error) =>
-                    ErrorText(error: error.toString()),
+              Center(
+                child: CachedNetworkImage(
+                  imageUrl: item.documentation,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      const Loader(),
+                  errorWidget: (context, url, error) =>
+                      ErrorText(error: error.toString()),
+                ),
               ),
             ],
           ),

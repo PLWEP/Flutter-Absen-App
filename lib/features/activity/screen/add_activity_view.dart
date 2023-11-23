@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:routemaster/routemaster.dart';
 
 class AddActivityView extends ConsumerStatefulWidget {
   const AddActivityView({super.key});
@@ -249,9 +250,6 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                             );
                           } else {
                             addActivity();
-                            if (isLoading == false) {
-                              Navigator.pop(context);
-                            }
                           }
                         }
                       },
