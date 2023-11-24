@@ -1,9 +1,10 @@
-import 'package:absen_app/common/build_pdf.dart';
 import 'package:absen_app/common/widget/error_text.dart';
 import 'package:absen_app/common/widget/loader.dart';
 import 'package:absen_app/features/activity/provider/activity_provider.dart';
 import 'package:absen_app/features/auth/provider/auth_provider.dart';
+import 'package:absen_app/features/home/provider/pdf_provider.dart';
 import 'package:absen_app/features/home/widget/activity_card.dart';
+import 'package:absen_app/model/activity_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
@@ -19,10 +20,15 @@ class HomeView extends ConsumerWidget {
   void navigateToAddActivity(BuildContext context) =>
       Routemaster.of(context).push('/add-activity');
 
+  void exportToPdf(
+          BuildContext context, WidgetRef ref, List<Activity> activities) =>
+      ref.read(pdfControllerProvider.notifier).exportPDF(context, activities);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
     final isLoading = ref.watch(activityControllerProvider);
+    final isPDFLoading = ref.watch(pdfControllerProvider);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -57,13 +63,20 @@ class HomeView extends ConsumerWidget {
             ],
           ),
           actions: [
-            IconButton(
-              splashRadius: 20,
-              onPressed: () => ref
-                  .watch(userActivityProvider)
-                  .whenData((value) => generateReport(value, user)),
-              icon: const Icon(Icons.picture_as_pdf),
-            ),
+            isLoading
+                ? const Loader()
+                : isPDFLoading
+                    ? const Loader()
+                    : ref.watch(userActivityProvider).when(
+                          data: (data) => IconButton(
+                            splashRadius: 20,
+                            onPressed: () => exportToPdf(context, ref, data),
+                            icon: const Icon(Icons.picture_as_pdf),
+                          ),
+                          error: (error, stackTrace) =>
+                              ErrorText(error: error.toString()),
+                          loading: () => const Loader(),
+                        ),
           ],
           backgroundColor: const Color(0xFF0D47A1),
         ),
