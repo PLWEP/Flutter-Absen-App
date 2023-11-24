@@ -1,3 +1,4 @@
+import 'package:absen_app/common/build_pdf.dart';
 import 'package:absen_app/common/widget/error_text.dart';
 import 'package:absen_app/common/widget/loader.dart';
 import 'package:absen_app/features/activity/provider/activity_provider.dart';
@@ -58,7 +59,9 @@ class HomeView extends ConsumerWidget {
           actions: [
             IconButton(
               splashRadius: 20,
-              onPressed: () {},
+              onPressed: () => ref
+                  .watch(userActivityProvider)
+                  .whenData((value) => generateReport(value, user)),
               icon: const Icon(Icons.picture_as_pdf),
             ),
           ],
