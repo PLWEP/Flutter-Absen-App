@@ -96,7 +96,7 @@ class HomeView extends ConsumerWidget {
                           itemCount: data.length,
                           itemBuilder: (BuildContext context, int index) {
                             final item = data[index];
-                            return ActivityCard(item: item);
+                            return ActivityCard(activity: item);
                           },
                         ),
                       ),

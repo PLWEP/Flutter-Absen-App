@@ -1,19 +1,25 @@
 import 'package:absen_app/common/widget/error_text.dart';
 import 'package:absen_app/common/widget/loader.dart';
+import 'package:absen_app/features/activity/provider/activity_provider.dart';
 import 'package:absen_app/model/activity_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class ActivityCard extends StatelessWidget {
-  final Activity item;
-  const ActivityCard({super.key, required this.item});
+class ActivityCard extends ConsumerWidget {
+  final Activity activity;
+  const ActivityCard({super.key, required this.activity});
+
+  void deleteActivity(WidgetRef ref, BuildContext context) => ref
+      .read(activityControllerProvider.notifier)
+      .deleteActivity(context, activity);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ExpansionTile(
       title: Text(
-        DateFormat.yMEd().format(item.date).toString(),
+        DateFormat.yMEd().format(activity.date).toString(),
         style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
@@ -30,16 +36,40 @@ class ActivityCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                item.title,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    activity.title,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        splashRadius: 20,
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.edit,
+                        ),
+                      ),
+                      IconButton(
+                        splashRadius: 20,
+                        onPressed: () => deleteActivity(ref, context),
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
               const SizedBox(height: 15),
               Text(
-                item.description,
+                activity.description,
                 style: const TextStyle(
                   fontSize: 15,
                 ),
@@ -47,7 +77,7 @@ class ActivityCard extends StatelessWidget {
               const SizedBox(height: 15),
               CachedNetworkImage(
                 width: 75,
-                imageUrl: item.documentation,
+                imageUrl: activity.documentation,
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     const Loader(),
                 errorWidget: (context, url, error) =>

@@ -71,10 +71,18 @@ class ActivityController extends StateNotifier<bool> {
   }
 
   void deleteActivity(BuildContext context, Activity activity) async {
+    final imageRes = await _storageRepository.deleteFile(
+      path: 'activity',
+      id: activity.id,
+    );
     final res = await _activityRepository.deleteActivity(activity);
-    res.fold(
+
+    imageRes.fold(
       (l) => showSnackBar(context, l.message),
-      (r) => showSnackBar(context, "Delete activity successfully"),
+      (r) => res.fold(
+        (l) => showSnackBar(context, l.message),
+        (r) => showSnackBar(context, "Delete activity successfully"),
+      ),
     );
   }
 
