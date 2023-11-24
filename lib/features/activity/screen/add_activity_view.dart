@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:absen_app/common/constants.dart';
+import 'package:absen_app/common/widget/image_pick.dart';
 import 'package:absen_app/common/widget/loader.dart';
 import 'package:absen_app/features/activity/provider/activity_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:routemaster/routemaster.dart';
 
 class AddActivityView extends ConsumerStatefulWidget {
   const AddActivityView({super.key});
@@ -23,8 +25,43 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
   final TextEditingController _descriptionController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
-  final imagePicker = ImagePicker();
   File? image;
+
+  void pop() => Routemaster.of(context).pop();
+
+  Future<void> showPictureDialog() async {
+    final imagePicker = ImagePicker();
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: const Text('Pilih Metode'),
+          children: [
+            SimpleDialogOption(
+              onPressed: () async {
+                final file = await getFromCamera(imagePicker);
+                setState(() {
+                  image = file;
+                });
+                pop();
+              },
+              child: const Text('Buka Kamera'),
+            ),
+            SimpleDialogOption(
+              onPressed: () async {
+                final file = await getFromGallery(imagePicker);
+                setState(() {
+                  image = file;
+                });
+                pop();
+              },
+              child: const Text('Buka Gallery'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   void dispose() {
@@ -74,20 +111,22 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                   ),
                   const SizedBox(height: 10),
                   GestureDetector(
-                    onTap: () => showDatePicker(
-                      context: context,
-                      initialDate: date,
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2099),
-                    ).then(
-                      (value) {
-                        setState(() {
-                          if (value != null) {
-                            date = value;
-                          }
-                        });
-                      },
-                    ),
+                    onTap: () => isLoading
+                        ? {}
+                        : showDatePicker(
+                            context: context,
+                            initialDate: date,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2099),
+                          ).then(
+                            (value) {
+                              setState(() {
+                                if (value != null) {
+                                  date = value;
+                                }
+                              });
+                            },
+                          ),
                     child: Container(
                       alignment: Alignment.center,
                       height: 50,
@@ -128,6 +167,7 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                   ),
                   const SizedBox(height: 15),
                   TextFormField(
+                    enabled: isLoading ? false : true,
                     controller: _titleController,
                     validator: (value) =>
                         value!.isEmpty ? "Please Fill The Field" : null,
@@ -175,6 +215,7 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                     height: 15,
                   ),
                   TextFormField(
+                    enabled: isLoading ? false : true,
                     controller: _descriptionController,
                     validator: (value) =>
                         value!.isEmpty ? "Please Fill The Field" : null,
@@ -222,9 +263,7 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                     child: InkWell(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
-                      onTap: () {
-                        showPictureDialog();
-                      },
+                      onTap: () => isLoading ? {} : showPictureDialog(),
                       child: const Center(
                         child: Text(
                           'Documentation',
@@ -277,61 +316,6 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
           ),
         ],
       ),
-    );
-  }
-
-  // get from gallery
-  getFromGallery() async {
-    final pickedFile = await imagePicker.pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    if (pickedFile != null) {
-      setState(() {
-        image = File(pickedFile.path);
-      });
-    }
-  }
-
-  // get from camera
-  getFromCamera() async {
-    final pickedFile = await imagePicker.pickImage(
-      source: ImageSource.camera,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    if (pickedFile != null) {
-      setState(() {
-        image = File(pickedFile.path);
-      });
-    }
-  }
-
-  Future<void> showPictureDialog() async {
-    await showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-          title: const Text('Pilih Metode'),
-          children: [
-            SimpleDialogOption(
-              onPressed: () {
-                getFromCamera();
-                Navigator.of(context).pop();
-              },
-              child: const Text('Buka Kamera'),
-            ),
-            SimpleDialogOption(
-              onPressed: () {
-                getFromGallery();
-                Navigator.of(context).pop();
-              },
-              child: const Text('Buka Gallery'),
-            ),
-          ],
-        );
-      },
     );
   }
 }

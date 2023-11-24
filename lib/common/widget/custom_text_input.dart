@@ -1,3 +1,4 @@
+import 'package:absen_app/common/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextInput extends StatelessWidget {
@@ -26,7 +27,7 @@ class CustomTextInput extends StatelessWidget {
       decoration: InputDecoration(
         labelText: title,
         labelStyle: const TextStyle(
-          color: Color.fromRGBO(13, 71, 161, 1),
+          color: Constants.defaultColor,
           fontSize: 13,
           fontFamily: 'Poppins-regular',
           fontWeight: FontWeight.w600,
@@ -49,7 +50,7 @@ class CustomTextInput extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(5)),
           borderSide: BorderSide(
             width: 1,
-            color: Color.fromRGBO(13, 71, 161, 1),
+            color: Constants.defaultColor,
           ),
         ),
         errorBorder: const OutlineInputBorder(
