@@ -5,6 +5,7 @@ import 'package:absen_app/common/type_def.dart';
 import 'package:absen_app/model/activity_model.dart';
 import 'package:absen_app/model/user_model.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -54,13 +55,9 @@ class PDFRepository {
           ),
           pw.SizedBox(height: 10),
           pw.TableHelper.fromTextArray(
-            border: null,
+            border: pw.TableBorder.all(),
             cellAlignment: pw.Alignment.center,
-            headerDecoration: const pw.BoxDecoration(
-              borderRadius: pw.BorderRadius.all(pw.Radius.circular(2)),
-            ),
             headerHeight: 25,
-            cellHeight: 40,
             cellAlignments: {
               0: pw.Alignment.center,
               1: pw.Alignment.center,
@@ -76,13 +73,6 @@ class PDFRepository {
               color: _darkColor,
               fontSize: 10,
             ),
-            rowDecoration: const pw.BoxDecoration(
-              border: pw.Border(
-                bottom: pw.BorderSide(
-                  width: .5,
-                ),
-              ),
-            ),
             headers: List<String>.generate(
               tableHeaders.length,
               (col) => tableHeaders[col],
@@ -90,12 +80,41 @@ class PDFRepository {
             data: List<List<dynamic>>.generate(
               activities.length,
               (row) => [
-                activities[row].date,
-                activities[row].title,
-                activities[row].description,
-                pw.Image(
-                  netImage[row],
-                  width: 100,
+                pw.Container(
+                  width: 150,
+                  padding: const pw.EdgeInsets.all(10),
+                  child: pw.Center(
+                    child: pw.Text(
+                      DateFormat.yMEd().format(activities[row].date).toString(),
+                    ),
+                  ),
+                ),
+                pw.Container(
+                  width: 200,
+                  padding: const pw.EdgeInsets.all(10),
+                  child: pw.Center(
+                    child: pw.Text(
+                      activities[row].title,
+                    ),
+                  ),
+                ),
+                pw.Container(
+                  padding: const pw.EdgeInsets.all(10),
+                  child: pw.Center(
+                    child: pw.Text(
+                      activities[row].description,
+                      textAlign: pw.TextAlign.justify,
+                    ),
+                  ),
+                ),
+                pw.Container(
+                  width: 250,
+                  child: pw.Center(
+                    child: pw.Image(
+                      netImage[row],
+                      width: 75,
+                    ),
+                  ),
                 ),
               ],
             ),
