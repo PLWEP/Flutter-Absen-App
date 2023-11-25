@@ -43,9 +43,4 @@ class ActivityRepository {
       return left(Failure(e.toString()));
     }
   }
-
-  Stream<Activity> getActivityById(String activityId) =>
-      _activities.doc(activityId).snapshots().map(
-            (event) => Activity.fromMap(event.data() as Map<String, dynamic>),
-          );
 }

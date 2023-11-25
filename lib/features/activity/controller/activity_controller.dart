@@ -85,7 +85,4 @@ class ActivityController extends StateNotifier<bool> {
       ),
     );
   }
-
-  Stream<Activity> getPostById(String activityId) =>
-      _activityRepository.getActivityById(activityId);
 }

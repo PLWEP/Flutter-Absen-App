@@ -43,7 +43,7 @@ class HomeView extends ConsumerWidget {
                       radius: 20,
                       backgroundImage: AssetImage('assets/profile.jpeg'),
                     );
-                  } else {}
+                  } 
                   return CircleAvatar(
                     radius: 20,
                     backgroundImage: NetworkImage(user.profilePic),

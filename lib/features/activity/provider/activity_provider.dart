@@ -21,11 +21,6 @@ final activityControllerProvider =
   },
 );
 
-final getPostByIdProvider = StreamProvider.family(
-  (ref, String postId) =>
-      ref.watch(activityControllerProvider.notifier).getPostById(postId),
-);
-
 final activityRepositoryProvider = Provider(
   (ref) => ActivityRepository(
     firestore: ref.watch(firestoreProvider),

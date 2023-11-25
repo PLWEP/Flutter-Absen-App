@@ -46,24 +46,13 @@ class ActivityCard extends ConsumerWidget {
                       fontWeight: FontWeight.w800,
                     ),
                   ),
-                  Row(
-                    children: [
-                      IconButton(
-                        splashRadius: 20,
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.edit,
-                        ),
-                      ),
-                      IconButton(
-                        splashRadius: 20,
-                        onPressed: () => deleteActivity(ref, context),
-                        icon: const Icon(
-                          Icons.delete,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ],
+                  IconButton(
+                    splashRadius: 20,
+                    onPressed: () => deleteActivity(ref, context),
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
                   ),
                 ],
               ),
