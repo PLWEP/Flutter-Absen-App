@@ -37,18 +37,20 @@ class HomeView extends ConsumerWidget {
             children: [
               GestureDetector(
                 onTap: () => navigateToProfile(context),
-                child: Builder(builder: (context) {
-                  if (user.profilePic == '') {
-                    return const CircleAvatar(
+                child: Builder(
+                  builder: (context) {
+                    if (user.profilePic == '') {
+                      return const CircleAvatar(
+                        radius: 20,
+                        backgroundImage: AssetImage('assets/profile.jpeg'),
+                      );
+                    }
+                    return CircleAvatar(
                       radius: 20,
-                      backgroundImage: AssetImage('assets/profile.jpeg'),
+                      backgroundImage: NetworkImage(user.profilePic),
                     );
-                  } 
-                  return CircleAvatar(
-                    radius: 20,
-                    backgroundImage: NetworkImage(user.profilePic),
-                  );
-                }),
+                  },
+                ),
               ),
               const SizedBox(width: 10),
               Expanded(

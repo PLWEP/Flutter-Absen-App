@@ -1,4 +1,5 @@
 import 'package:absen_app/features/activity/screen/add_activity_view.dart';
+import 'package:absen_app/features/activity/screen/edit_activity_view.dart';
 import 'package:absen_app/features/auth/screen/login_view.dart';
 import 'package:absen_app/features/auth/screen/register_view.dart';
 import 'package:absen_app/features/home/screen/home_view.dart';
@@ -20,5 +21,10 @@ final loggedInRoute = RouteMap(
     '/profile': (_) => const MaterialPage(child: ProfileView()),
     '/photo': (_) => const MaterialPage(child: PhotoView()),
     '/add-activity': (_) => const MaterialPage(child: AddActivityView()),
+    '/edit-activity/:activityId': (route) => MaterialPage(
+          child: EditActivityView(
+            activityId: route.pathParameters['activityId']!,
+          ),
+        ),
   },
 );

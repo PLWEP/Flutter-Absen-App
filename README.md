@@ -7,7 +7,7 @@
 ## Features
 
 -   Firebase Authentication (Login and Register)
--   Create and Delete Activity (Image store in storage firebase)
+-   Create, edit, and Delete Activity (Image store in storage firebase)
 -   Displaying Activity
 -   Export to PDF
 -   Responsive UI

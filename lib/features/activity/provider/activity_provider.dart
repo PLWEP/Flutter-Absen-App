@@ -8,6 +8,11 @@ final userActivityProvider = StreamProvider(
   (ref) => ref.watch(activityControllerProvider.notifier).fetchUserActivity(),
 );
 
+final getActivityByIdProvider = StreamProvider.family(
+  (ref, String activityId) =>
+      ref.watch(activityControllerProvider.notifier).getPostById(activityId),
+);
+
 final activityControllerProvider =
     StateNotifierProvider<ActivityController, bool>(
   (ref) {

@@ -43,4 +43,19 @@ class ActivityRepository {
       return left(Failure(e.toString()));
     }
   }
+
+  Stream<Activity> getActivityById(String activityId) =>
+      _activities.doc(activityId).snapshots().map(
+            (event) => Activity.fromMap(event.data() as Map<String, dynamic>),
+          );
+
+  FutureVoid editActivity(Activity activity) async {
+    try {
+      return right(_activities.doc(activity.id).update(activity.toMap()));
+    } on FirebaseException catch (e) {
+      return left(Failure(e.message!));
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
 }

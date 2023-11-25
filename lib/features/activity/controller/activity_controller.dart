@@ -85,4 +85,34 @@ class ActivityController extends StateNotifier<bool> {
       ),
     );
   }
+
+  Stream<Activity> getPostById(String activityId) =>
+      _activityRepository.getActivityById(activityId);
+
+  void editActivity({
+    required File? file,
+    required Activity activity,
+    required BuildContext context,
+  }) async {
+    state = true;
+    if (file != null) {
+      final imageRes = await _storageRepository.storeFile(
+        path: 'activity',
+        id: activity.id,
+        file: file,
+      );
+
+      imageRes.fold(
+        (l) => showSnackBar(context, l.message),
+        (r) => activity = activity.copyWith(documentation: r),
+      );
+    }
+
+    final res = await _activityRepository.editActivity(activity);
+    state = false;
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) => Routemaster.of(context).pop(),
+    );
+  }
 }

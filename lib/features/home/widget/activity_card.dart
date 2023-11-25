@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:routemaster/routemaster.dart';
 
 class ActivityCard extends ConsumerWidget {
   final Activity activity;
@@ -14,6 +15,9 @@ class ActivityCard extends ConsumerWidget {
   void deleteActivity(WidgetRef ref, BuildContext context) => ref
       .read(activityControllerProvider.notifier)
       .deleteActivity(context, activity);
+
+  void navigateToEditActivity(BuildContext context) =>
+      Routemaster.of(context).push('/edit-activity/${activity.id}');
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -46,13 +50,24 @@ class ActivityCard extends ConsumerWidget {
                       fontWeight: FontWeight.w800,
                     ),
                   ),
-                  IconButton(
-                    splashRadius: 20,
-                    onPressed: () => deleteActivity(ref, context),
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                    ),
+                  Row(
+                    children: [
+                      IconButton(
+                        splashRadius: 20,
+                        onPressed: () => navigateToEditActivity(context),
+                        icon: const Icon(
+                          Icons.edit,
+                        ),
+                      ),
+                      IconButton(
+                        splashRadius: 20,
+                        onPressed: () => deleteActivity(ref, context),
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
