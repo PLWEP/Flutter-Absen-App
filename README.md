@@ -1,30 +1,29 @@
-# absen_app
+# Flutter Absen Application
 
-A new Flutter project.
+[![GitHub issues](https://img.shields.io/github/issues/PLWEP/Flutter-Absen-App?style=for-the-badge)](https://github.com/PLWEP/Flutter-Absen-App/issues)
+[![GitHub forks](https://img.shields.io/github/forks/PLWEP/Flutter-Absen-App?style=for-the-badge)](https://github.com/PLWEP/Flutter-Absen-App/network)
+[![GitHub stars](https://img.shields.io/github/stars/PLWEP/Flutter-Absen-App?style=for-the-badge)](https://github.com/PLWEP/Flutter-Absen-App/stargazers)
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application that follows the
-[simple app state management
-tutorial](https://flutter.dev/docs/development/data-and-backend/state-mgmt/simple).
+-   Firebase Authentication (Login and Register)
+-   Create and Delete Activity (Image store in storage firebase)
+-   Displaying Activity
+-   Export to PDF
+-   Responsive UI
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots
 
-## Assets
-
-The `assets` directory houses images, fonts, and any other files you want to
-include with your application.
-
-The `assets/images` directory contains [resolution-aware
-images](https://flutter.dev/docs/development/ui/assets-and-images#resolution-aware).
-
-## Localization
-
-This project generates localized messages based on arb files found in
-the `lib/src/localization` directory.
-
-To support additional languages, please visit the tutorial on
-[Internationalizing Flutter
-apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
+<div align="left">
+<img src="assets/readme/0.png"  width="150px">
+<img src="assets/readme/1.png"  width="150px">
+<img src="assets/readme/2.png"  width="150px">
+<img src="assets/readme/3.png"  width="150px">
+<img src="assets/readme/4.png"  width="150px">
+<img src="assets/readme/5.png"  width="150px">
+<img src="assets/readme/6.png"  width="150px">
+<img src="assets/readme/7.png"  width="150px">
+<img src="assets/readme/8.png"  width="150px">
+<img src="assets/readme/9.png"  width="150px">
+<img src="assets/readme/10.png"  width="150px">
+</div>
