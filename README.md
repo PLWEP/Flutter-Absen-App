@@ -16,7 +16,6 @@
 ## Screenshots
 
 <div align="left">
-<img src="assets/readme/0.png"  width="150px">
 <img src="assets/readme/1.png"  width="150px">
 <img src="assets/readme/2.png"  width="150px">
 <img src="assets/readme/3.png"  width="150px">
