@@ -21,9 +21,4 @@
 <img src="assets/readme/3.png"  width="150px">
 <img src="assets/readme/4.png"  width="150px">
 <img src="assets/readme/5.png"  width="150px">
-<img src="assets/readme/6.png"  width="150px">
-<img src="assets/readme/7.png"  width="150px">
-<img src="assets/readme/8.png"  width="150px">
-<img src="assets/readme/9.png"  width="150px">
-<img src="assets/readme/10.png"  width="150px">
 </div>
