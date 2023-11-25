@@ -10,6 +10,9 @@ class ProfileView extends ConsumerWidget {
   void navigateToPhoto(BuildContext context) =>
       Routemaster.of(context).push('/photo');
 
+  void navigateToEditProfile(BuildContext context) =>
+      Routemaster.of(context).push('/edit-profile');
+
   void logOut(WidgetRef ref, BuildContext context) {
     ref.read(authControllerProvider.notifier).logout();
     Routemaster.of(context).pop();
@@ -91,7 +94,7 @@ class ProfileView extends ConsumerWidget {
                           title: const Text("Edit Profile"),
                           leading: const Icon(Icons.person),
                           iconColor: Colors.black,
-                          onTap: () {},
+                          onTap: () => navigateToEditProfile(context),
                         ),
                         ListTile(
                           trailing: const Icon(Icons.navigate_next),
