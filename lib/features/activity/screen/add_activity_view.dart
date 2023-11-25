@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:dotted_border/dotted_border.dart';
 
 class AddActivityView extends ConsumerStatefulWidget {
   const AddActivityView({super.key});
@@ -211,9 +212,7 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 15),
                   TextFormField(
                     enabled: isLoading ? false : true,
                     controller: _descriptionController,
@@ -254,24 +253,61 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                     cursorColor: Colors.black,
                   ),
                   const SizedBox(height: 15),
-                  Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: image != null ? Colors.green : Colors.red,
+                  const Text(
+                    'Documentation',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
                     ),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () => isLoading ? {} : showPictureDialog(),
-                      child: const Center(
-                        child: Text(
-                          'Documentation',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 15),
+                  Stack(
+                    children: [
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () => isLoading ? {} : showPictureDialog(),
+                        child: DottedBorder(
+                          borderType: BorderType.RRect,
+                          radius: const Radius.circular(10),
+                          dashPattern: const [10, 4],
+                          strokeCap: StrokeCap.round,
+                          child: Container(
+                            width: double.infinity,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: InkWell(
+                              child: image != null
+                                  ? Image.file(image!)
+                                  : const Center(
+                                      child: Icon(
+                                        Icons.camera_alt_outlined,
+                                        size: 40,
+                                      ),
+                                    ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      if (image != null)
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                image = null;
+                              });
+                            },
+                          ),
+                        ),
+                    ],
                   ),
                   const SizedBox(height: 15),
                   SizedBox(
