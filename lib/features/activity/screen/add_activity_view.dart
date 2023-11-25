@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:absen_app/common/constants.dart';
+import 'package:absen_app/common/text_form_activity_decoration.dart';
+import 'package:absen_app/common/utils.dart';
 import 'package:absen_app/common/widget/image_pick.dart';
 import 'package:absen_app/common/widget/loader.dart';
 import 'package:absen_app/features/activity/provider/activity_provider.dart';
@@ -144,9 +146,7 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                             padding: EdgeInsets.only(left: 10),
                           ),
                           const Icon(Icons.date_range),
-                          const SizedBox(
-                            width: 10,
-                          ),
+                          const SizedBox(width: 10),
                           Text(
                             DateFormat.yMEd().format(date).toString(),
                             style: const TextStyle(
@@ -172,36 +172,7 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                     controller: _titleController,
                     validator: (value) =>
                         value!.isEmpty ? "Please Fill The Field" : null,
-                    decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Colors.black,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Colors.black,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Colors.red,
-                        ),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ),
+                    decoration: decoration,
                     cursorColor: Colors.black,
                   ),
                   const SizedBox(height: 15),
@@ -218,36 +189,7 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                     controller: _descriptionController,
                     validator: (value) =>
                         value!.isEmpty ? "Please Fill The Field" : null,
-                    decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Colors.black,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Colors.black,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Colors.red,
-                        ),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ),
+                    decoration: decoration,
                     maxLength: 250,
                     maxLines: 5,
                     cursorColor: Colors.black,
@@ -278,16 +220,14 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: InkWell(
-                              child: image != null
-                                  ? Image.file(image!)
-                                  : const Center(
-                                      child: Icon(
-                                        Icons.camera_alt_outlined,
-                                        size: 40,
-                                      ),
+                            child: image != null
+                                ? Image.file(image!)
+                                : const Center(
+                                    child: Icon(
+                                      Icons.camera_alt_outlined,
+                                      size: 40,
                                     ),
-                            ),
+                                  ),
                           ),
                         ),
                       ),
@@ -317,18 +257,14 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           if (image == null) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Please input image'),
-                              ),
-                            );
+                            showSnackBar(context, 'Please input image');
                           } else {
                             addActivity();
                           }
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
+                        backgroundColor: Constants.defaultColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
