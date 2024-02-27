@@ -1,6 +1,6 @@
 import 'package:absen_app/common/constants.dart';
 import 'package:absen_app/common/exception.dart';
-import 'package:absen_app/data/model/activity.dart';
+import 'package:absen_app/data/models/activity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ActivityRemoteDatasource {
