@@ -1,44 +1,16 @@
-class Konten {
-  String judul;
-  String deskripsi;
-  DateTime tanggal;
-  String dokumentasi;
-  Konten({
-    required this.judul,
-    required this.deskripsi,
-    required this.tanggal,
-    required this.dokumentasi,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  Konten copyWith({
-    String? judul,
-    String? deskripsi,
-    DateTime? tanggal,
-    String? dokumentasi,
-  }) {
-    return Konten(
-      judul: judul ?? this.judul,
-      deskripsi: deskripsi ?? this.deskripsi,
-      tanggal: tanggal ?? this.tanggal,
-      dokumentasi: dokumentasi ?? this.dokumentasi,
-    );
-  }
+part 'konten.freezed.dart';
+part 'konten.g.dart';
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'judul': judul,
-      'deskripsi': deskripsi,
-      'tanggal': tanggal.millisecondsSinceEpoch,
-      'dokumentasi': dokumentasi,
-    };
-  }
+@freezed
+class Konten with _$Konten {
+  factory Konten({
+    required String judul,
+    required String deskripsi,
+    required DateTime tanggal,
+    required String dokumentasi,
+  }) = _Konten;
 
-  factory Konten.fromMap(Map<String, dynamic> map) {
-    return Konten(
-      judul: map['judul'] as String,
-      deskripsi: map['deskripsi'] as String,
-      tanggal: DateTime.fromMillisecondsSinceEpoch(map['tanggal'] as int),
-      dokumentasi: map['dokumentasi'] as String,
-    );
-  }
+  factory Konten.fromJson(Map<String, dynamic> json) => _$KontenFromJson(json);
 }
