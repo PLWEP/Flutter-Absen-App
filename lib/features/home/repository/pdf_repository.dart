@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:absen_app/common/failure.dart';
 import 'package:absen_app/common/type_def.dart';
-import 'package:absen_app/model/activity_model.dart';
-import 'package:absen_app/model/user_model.dart';
+import 'package:absen_app/data/model/activity_model.dart';
+import 'package:absen_app/data/model/user_model.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';

@@ -1,6 +1,6 @@
 import 'package:absen_app/features/auth/provider/auth_provider.dart';
 import 'package:absen_app/features/home/repository/pdf_repository.dart';
-import 'package:absen_app/model/activity_model.dart';
+import 'package:absen_app/data/model/activity_model.dart';
 import 'package:absen_app/common/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

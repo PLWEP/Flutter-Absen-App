@@ -1,7 +1,7 @@
 import 'package:absen_app/common/constants.dart';
 import 'package:absen_app/common/failure.dart';
 import 'package:absen_app/common/type_def.dart';
-import 'package:absen_app/model/activity_model.dart';
+import 'package:absen_app/data/model/activity_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 

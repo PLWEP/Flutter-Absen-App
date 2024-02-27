@@ -1,7 +1,7 @@
 import 'package:absen_app/common/firebase_provider.dart';
 import 'package:absen_app/features/auth/controller/auth_controller.dart';
 import 'package:absen_app/features/auth/repository/auth_repository.dart';
-import 'package:absen_app/model/user_model.dart';
+import 'package:absen_app/data/model/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userProvider = StateProvider<UserModel?>((ref) => null);

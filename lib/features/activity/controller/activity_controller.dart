@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:absen_app/common/repository/storage_repository.dart';
 import 'package:absen_app/features/activity/repository/activity_repository.dart';
 import 'package:absen_app/features/auth/provider/auth_provider.dart';
-import 'package:absen_app/model/activity_model.dart';
+import 'package:absen_app/data/model/activity_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';

@@ -1,7 +1,7 @@
 import 'package:absen_app/common/widget/error_text.dart';
 import 'package:absen_app/common/widget/loader.dart';
 import 'package:absen_app/features/activity/provider/activity_provider.dart';
-import 'package:absen_app/model/activity_model.dart';
+import 'package:absen_app/data/model/activity_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';

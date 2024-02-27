@@ -6,7 +6,7 @@ import 'package:absen_app/common/widget/error_text.dart';
 import 'package:absen_app/common/widget/image_pick.dart';
 import 'package:absen_app/common/widget/loader.dart';
 import 'package:absen_app/features/activity/provider/activity_provider.dart';
-import 'package:absen_app/model/activity_model.dart';
+import 'package:absen_app/data/model/activity_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';

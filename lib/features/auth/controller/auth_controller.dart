@@ -1,6 +1,6 @@
 import 'package:absen_app/features/auth/provider/auth_provider.dart';
 import 'package:absen_app/features/auth/repository/auth_repository.dart';
-import 'package:absen_app/model/user_model.dart';
+import 'package:absen_app/data/model/user_model.dart';
 import 'package:absen_app/common/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

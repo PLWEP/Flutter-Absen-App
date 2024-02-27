@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:absen_app/common/repository/storage_repository.dart';
 import 'package:absen_app/features/auth/provider/auth_provider.dart';
 import 'package:absen_app/features/profile/repository/profile_repository.dart';
-import 'package:absen_app/model/user_model.dart';
+import 'package:absen_app/data/model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:absen_app/common/utils.dart';
