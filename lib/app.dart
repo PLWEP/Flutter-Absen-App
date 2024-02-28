@@ -1,5 +1,5 @@
 import 'package:absen_app/common/key.dart';
-import 'package:absen_app/presentation/providers/auth_provider.dart';
+import 'package:absen_app/auth/presentation/notifier/auth_notifier.dart';
 import 'package:absen_app/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

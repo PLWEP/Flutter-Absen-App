@@ -1,20 +1,17 @@
 import 'package:absen_app/common/key.dart';
-import 'package:absen_app/data/datasources/auth_remote_datasource.dart';
-import 'package:absen_app/data/models/user.dart';
+import 'package:absen_app/auth/data/model/user.dart';
 import 'package:absen_app/common/utils.dart';
-import 'package:absen_app/data/repositories/auth_repository_impl.dart';
 import 'package:absen_app/domain/usecases/log_out.dart';
-import 'package:absen_app/domain/usecases/register_with_email.dart';
-import 'package:absen_app/domain/usecases/sign_in_with_email.dart';
+import 'package:absen_app/auth/domain/usecases/register_with_email.dart';
+import 'package:absen_app/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:absen_app/presentation/providers/firebase_provider.dart';
 
-class AuthController extends StateNotifier<bool> {
+class AuthNotifier extends StateNotifier<bool> {
   final SignInWithEmail _signInWithEmail;
   final RegisterWithEmail _registerWithEmail;
   final LogOut _logOut;
   final Ref _ref;
-  AuthController({
+  AuthNotifier({
     required Ref ref,
     required LogOut logOutUseCase,
     required RegisterWithEmail registerWithEmailUseCase,
@@ -70,39 +67,3 @@ class AuthController extends StateNotifier<bool> {
 }
 
 final userProvider = StateProvider<UserModel?>((ref) => null);
-
-final authRemoteDataSourceProvider = Provider(
-  (ref) => AuthRemoteDatasource(
-    auth: ref.watch(authProvider),
-    firestore: ref.watch(firestoreProvider),
-  ),
-);
-
-final authRepositoryProvider = Provider(
-  (ref) => AuthRepositoryImpl(
-    authRemoteDatasource: ref.watch(authRemoteDataSourceProvider),
-  ),
-);
-
-final logOutProvider = Provider(
-  (ref) => LogOut(ref.watch(authRepositoryProvider)),
-);
-
-final registerWithEmailProvider = Provider(
-  (ref) => RegisterWithEmail(ref.watch(authRepositoryProvider)),
-);
-
-final signInWithEmailProvider = Provider(
-  (ref) => SignInWithEmail(ref.watch(authRepositoryProvider)),
-);
-
-final authControllerProvider = StateNotifierProvider<AuthController, bool>(
-  (ref) {
-    return AuthController(
-      logOutUseCase: ref.watch(logOutProvider),
-      signInWithEmailUseCase: ref.watch(signInWithEmailProvider),
-      registerWithEmailUseCase: ref.watch(registerWithEmailProvider),
-      ref: ref,
-    );
-  },
-);

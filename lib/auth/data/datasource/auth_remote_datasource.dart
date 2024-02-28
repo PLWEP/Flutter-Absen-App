@@ -1,6 +1,6 @@
 import 'package:absen_app/common/constants.dart';
 import 'package:absen_app/common/exception.dart';
-import 'package:absen_app/data/models/user.dart';
+import 'package:absen_app/auth/data/model/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

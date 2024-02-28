@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:absen_app/presentation/providers/auth_provider.dart';
+import 'package:absen_app/auth/presentation/notifier/auth_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
