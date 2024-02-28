@@ -1,7 +1,7 @@
 import 'package:absen_app/common/widget/loader.dart';
-import 'package:absen_app/features/auth/provider/auth_provider.dart';
 import 'package:absen_app/common/widget/custom_layout.dart';
 import 'package:absen_app/common/widget/custom_text_input.dart';
+import 'package:absen_app/presentation/providers/auth_provider.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,7 +30,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
   void navigateToRegister() => Routemaster.of(context).push('/register');
 
   void login() => ref.read(authControllerProvider.notifier).signInWithEmail(
-        context,
         _emailController.text.trim(),
         _passwordController.text.trim(),
       );

@@ -1,0 +1,153 @@
+import 'dart:io';
+
+import 'package:absen_app/common/key.dart';
+import 'package:absen_app/common/repository/storage_repository.dart';
+import 'package:absen_app/data/models/activity.dart';
+import 'package:absen_app/data/repositories/activity_repository_impl.dart';
+import 'package:absen_app/domain/repositories/activity_repository.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
+import 'package:absen_app/common/utils.dart';
+import 'package:uuid/uuid.dart';
+import 'package:absen_app/presentation/providers/firebase_provider.dart';
+
+class ActivityController extends StateNotifier<bool> {
+  final ActivityRepository _activityRepository;
+  final Ref _ref;
+  // final StorageRepositorty _storageRepository;
+
+  ActivityController(
+      {required ActivityRepository activityRepository,
+      required Ref ref,
+      // required StorageRepositorty storageRepository,
+      })
+      : _activityRepository = activityRepository,
+        // _storageRepository = storageRepository,
+        _ref = ref,
+        super(false);
+
+  // void addActivity({
+  //   required BuildContext context,
+  //   required String title,
+  //   required String description,
+  //   required DateTime date,
+  //   required File? file,
+  // }) async {
+  //   state = true;
+  //   String activityId = const Uuid().v1();
+  //   final user = _ref.read(userProvider)!;
+  //   final imageRes = await _storageRepository.storeFile(
+  //     path: 'activity',
+  //     id: activityId,
+  //     file: file,
+  //   );
+
+  //   imageRes.fold(
+  //     (l) => showSnackBar(context, l.message),
+  //     (r) async {
+  //       final Activity activity = Activity(
+  //         id: activityId,
+  //         uid: user.uid,
+  //         title: title,
+  //         description: description,
+  //         date: date,
+  //         documentation: r,
+  //       );
+
+  //       final res = await _activityRepository.addActivity(activity);
+  //       state = false;
+  //       res.fold(
+  //         (l) => showSnackBar(context, l.message),
+  //         (r) {
+  //           showSnackBar(context, "Activity added successfully");
+  //           Routemaster.of(context).pop();
+  //         },
+  //       );
+  //     },
+  //   );
+  // }
+
+  // Stream<List<Activity>> fetchUserActivity() {
+  //   final uid = _ref.read(userProvider)!.uid;
+  //   return _activityRepository.fetchUserActivity(uid);
+  // }
+
+  // void deleteActivity(Activity activity) async {
+  //   final imageRes = await _storageRepository.deleteFile(
+  //     path: 'activity',
+  //     id: activity.id,
+  //   );
+  //   final res = await _activityRepository.deleteActivity(activity);
+
+  //   imageRes.fold(
+  //     (l) => snackbarKey.currentState
+  //         ?.showSnackBar(showSnackBarWithoutContext(l.message)),
+  //     (r) => res.fold(
+  //       (l) => snackbarKey.currentState
+  //           ?.showSnackBar(showSnackBarWithoutContext(l.message)),
+  //       (r) => snackbarKey.currentState?.showSnackBar(
+  //           showSnackBarWithoutContext("Delete activity successfully")),
+  //     ),
+  //   );
+  // }
+
+  // Stream<Activity> getPostById(String activityId) =>
+  //     _activityRepository.getActivityById(activityId);
+
+  // void editActivity({
+  //   required File? file,
+  //   required Activity activity,
+  //   required BuildContext context,
+  // }) async {
+  //   state = true;
+  //   if (file != null) {
+  //     final imageRes = await _storageRepository.storeFile(
+  //       path: 'activity',
+  //       id: activity.id,
+  //       file: file,
+  //     );
+
+  //     imageRes.fold(
+  //       (l) => showSnackBar(context, l.message),
+  //       (r) => activity = activity.copyWith(documentation: r),
+  //     );
+  //   }
+
+  //   final res = await _activityRepository.editActivity(activity);
+  //   state = false;
+  //   res.fold(
+  //     (l) => showSnackBar(context, l.message),
+  //     (r) => Routemaster.of(context).pop(),
+  //   );
+  // }
+}
+
+final userActivityProvider = StreamProvider(
+  (ref) => ref.watch(activityControllerProvider.notifier).fetchUserActivity(),
+);
+
+final getActivityByIdProvider = StreamProvider.family(
+  (ref, String activityId) =>
+      ref.watch(activityControllerProvider.notifier).getPostById(activityId),
+);
+
+final activityControllerProvider =
+    StateNotifierProvider<ActivityController, bool>(
+  (ref) {
+    final activityRepository = ref.watch(activityRepositoryProvider);
+    final storageRepository = ref.watch(storageRepositoryProvider);
+    return ActivityController(
+      ref: ref,
+      activityRepository: activityRepository,
+      storageRepository: storageRepository,
+    );
+  },
+);
+
+final activityRepositoryProvider = Provider(
+  (ref) => ActivityRepositoryImpl(
+    activityRemoteDatasource: ,
+    firestore: ref.watch(firestoreProvider),
+  ),
+);

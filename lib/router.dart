@@ -1,7 +1,7 @@
 import 'package:absen_app/features/activity/screen/add_activity_view.dart';
 import 'package:absen_app/features/activity/screen/edit_activity_view.dart';
-import 'package:absen_app/features/auth/screen/login_view.dart';
-import 'package:absen_app/features/auth/screen/register_view.dart';
+import 'package:absen_app/presentation/pages/login_view.dart';
+import 'package:absen_app/presentation/pages/register_view.dart';
 import 'package:absen_app/features/home/screen/home_view.dart';
 import 'package:absen_app/features/profile/screen/edit_profile_view.dart';
 import 'package:absen_app/features/profile/screen/photo_view.dart';

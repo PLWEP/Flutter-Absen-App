@@ -13,16 +13,6 @@ class AuthRepositoryImpl implements AuthRepository {
   }) : _authRemoteDatasource = authRemoteDatasource;
 
   @override
-  Either<Failure, Stream<UserModel>> getUserData(String uid) {
-    try {
-      final result = _authRemoteDatasource.getUserData(uid);
-      return Right(result);
-    } on ServerException {
-      return const Left(ServerFailure('Terjadi kesalahan, coba lagi nanti'));
-    }
-  }
-
-  @override
   Future<Either<Failure, void>> logOut() async {
     try {
       return Right(await _authRemoteDatasource.logOut());

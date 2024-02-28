@@ -7,7 +7,7 @@ class LogOut {
 
   LogOut(this.repository);
 
-  Future<Either<Failure, void>> execute(String uid) {
+  Future<Either<Failure, void>> execute() {
     return repository.logOut();
   }
 }

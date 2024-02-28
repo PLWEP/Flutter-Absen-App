@@ -1,4 +1,4 @@
-import 'package:absen_app/common/firebase_provider.dart';
+import 'package:absen_app/presentation/providers/firebase_provider.dart';
 import 'package:absen_app/common/repository/storage_repository.dart';
 import 'package:absen_app/features/profile/controller/profile_controller.dart';
 import 'package:absen_app/features/profile/repository/profile_repository.dart';

@@ -8,3 +8,6 @@ void showSnackBar(BuildContext context, String text) =>
           content: Text(text),
         ),
       );
+
+SnackBar showSnackBarWithoutContext(String text) =>
+    SnackBar(content: Text(text));

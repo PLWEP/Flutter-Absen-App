@@ -1,7 +1,7 @@
 import 'package:absen_app/common/widget/loader.dart';
-import 'package:absen_app/features/auth/provider/auth_provider.dart';
 import 'package:absen_app/common/widget/custom_layout.dart';
 import 'package:absen_app/common/widget/custom_text_input.dart';
+import 'package:absen_app/presentation/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,7 +34,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
 
   void register() {
     ref.read(authControllerProvider.notifier).registerWithEmail(
-          context,
           _emailController.text.trim(),
           _passwordController.text.trim(),
         );

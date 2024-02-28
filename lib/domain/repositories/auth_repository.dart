@@ -7,7 +7,6 @@ abstract class AuthRepository {
     String email,
     String password,
   );
-  Either<Failure, Stream<UserModel>> getUserData(String uid);
   Future<Either<Failure, UserModel>> registerWithEmail(
     String email,
     String password,
