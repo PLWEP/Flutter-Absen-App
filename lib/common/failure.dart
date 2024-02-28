@@ -20,6 +20,6 @@ class CacheFailure extends Failure {
   const CacheFailure(String message) : super(message);
 }
 
-class SSLFailure extends Failure {
-  const SSLFailure(String message) : super(message);
+class PDFFailure extends Failure {
+  const PDFFailure(String message) : super(message);
 }

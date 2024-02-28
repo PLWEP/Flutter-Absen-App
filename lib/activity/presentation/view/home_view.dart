@@ -1,5 +1,7 @@
+import 'package:absen_app/activity/data/model/activity.dart';
 import 'package:absen_app/activity/presentation/presentation_provider.dart';
 import 'package:absen_app/activity/presentation/widget/activity_card.dart';
+import 'package:absen_app/auth/presentation/presentation_provider.dart';
 import 'package:absen_app/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,43 +18,41 @@ class HomeView extends ConsumerWidget {
   void navigateToAddActivity(BuildContext context) =>
       Routemaster.of(context).push('/add-activity');
 
-  // void exportToPdf(
-  //         BuildContext context, WidgetRef ref, List<Activity> activities) =>
-  //     ref.read(pdfControllerProvider.notifier).exportPDF(context, activities);
+  void exportToPdf(WidgetRef ref, List<Activity> activityList) =>
+      ref.read(pdfNotifierProvider.notifier).exportPDF(activityList);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final user = ref.watch(userProvider)!;
+    final user = ref.watch(authNotifierProvider).userData!;
     final activityState = ref.watch(activityNotifierProvider);
-    // final isPDFLoading = ref.watch(pdfControllerProvider);
+    final isPDFLoading = ref.watch(pdfNotifierProvider);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 80,
           title: Row(
             children: [
-              // GestureDetector(
-              //   onTap: () => navigateToProfile(context),
-              //   child: Builder(
-              //     builder: (context) {
-              //       if (user.profilePic == '') {
-              //         return const CircleAvatar(
-              //           radius: 20,
-              //           backgroundImage: AssetImage('assets/profile.jpeg'),
-              //         );
-              //       }
-              //       return CircleAvatar(
-              //         radius: 20,
-              //         backgroundImage: NetworkImage(user.profilePic),
-              //       );
-              //     },
-              //   ),
-              // ),
+              GestureDetector(
+                onTap: () => navigateToProfile(context),
+                child: Builder(
+                  builder: (context) {
+                    if (user.profilePic == '') {
+                      return const CircleAvatar(
+                        radius: 20,
+                        backgroundImage: AssetImage('assets/profile.jpeg'),
+                      );
+                    }
+                    return CircleAvatar(
+                      radius: 20,
+                      backgroundImage: NetworkImage(user.profilePic),
+                    );
+                  },
+                ),
+              ),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  // 'Hi ${user.name}!',
-                  'Hi !',
+                  'Hi ${user.name}!',
                   style: const TextStyle(
                     overflow: TextOverflow.fade,
                     fontSize: 20,
@@ -62,20 +62,18 @@ class HomeView extends ConsumerWidget {
             ],
           ),
           actions: [
-            // activityState
-            //     ? const Loader()
-            //     : isPDFLoading
-            //         ? const Loader()
-            //         : ref.watch(userActivityProvider).when(
-            //               data: (data) => IconButton(
-            //                 splashRadius: 20,
-            //                 onPressed: () => exportToPdf(context, ref, data),
-            //                 icon: const Icon(Icons.picture_as_pdf),
-            //               ),
-            //               error: (error, stackTrace) =>
-            //                   ErrorText(error: error.toString()),
-            //               loading: () => const Loader(),
-            //             ),
+            activityState.state == EnumState.loading
+                ? const Loader()
+                : isPDFLoading
+                    ? const Loader()
+                    : IconButton(
+                        splashRadius: 20,
+                        onPressed: () => exportToPdf(
+                          ref,
+                          activityState.activityList,
+                        ),
+                        icon: const Icon(Icons.picture_as_pdf),
+                      ),
           ],
           backgroundColor: const Color(0xFF0D47A1),
         ),

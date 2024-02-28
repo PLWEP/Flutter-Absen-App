@@ -1,5 +1,7 @@
+import 'package:absen_app/activity/data/data_provider.dart';
 import 'package:absen_app/activity/domain/domain_provider.dart';
 import 'package:absen_app/activity/presentation/notifier/activity_notifier.dart';
+import 'package:absen_app/activity/presentation/notifier/pdf_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final activityNotifierProvider =
@@ -16,4 +18,11 @@ final activityNotifierProvider =
       ref: ref,
     );
   },
+);
+
+final pdfNotifierProvider = StateNotifierProvider<PDFNotifier, bool>(
+  (ref) => PDFNotifier(
+    pdfRepository: ref.watch(pdfRepositoryProvider),
+    ref: ref,
+  ),
 );
