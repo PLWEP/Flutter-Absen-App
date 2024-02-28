@@ -95,7 +95,6 @@ class HomeView extends ConsumerWidget {
                         ? const EmptyText()
                         : Expanded(
                             child: ListView.builder(
-                              restorationId: 'classListView',
                               itemCount: activityState.activityList.length,
                               itemBuilder: (BuildContext context, int index) {
                                 final item = activityState.activityList[index];

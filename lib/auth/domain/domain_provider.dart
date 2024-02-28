@@ -1,4 +1,5 @@
 import 'package:absen_app/auth/data/data_provider.dart';
+import 'package:absen_app/auth/domain/usecases/edit_profile.dart';
 import 'package:absen_app/auth/domain/usecases/get_current_user.dart';
 import 'package:absen_app/auth/domain/usecases/get_user_data.dart';
 import 'package:absen_app/auth/domain/usecases/register_with_email.dart';
@@ -24,4 +25,8 @@ final getCurrentUserProvider = Provider(
 
 final getUserDataProvider = Provider(
   (ref) => GetUserData(ref.watch(authRepositoryProvider)),
+);
+
+final editProfileProvider = Provider(
+  (ref) => EditProfile(ref.watch(authRepositoryProvider)),
 );

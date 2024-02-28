@@ -77,4 +77,12 @@ class AuthRemoteDatasource {
       throw ServerException(e.toString());
     }
   }
+
+  Future<void> editProfile(UserModel user) async {
+    try {
+      return await _users.doc(user.uid).update(user.toJson());
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
 }

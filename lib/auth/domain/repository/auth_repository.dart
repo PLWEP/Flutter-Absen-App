@@ -10,4 +10,5 @@ abstract class AuthRepository {
   Future<Either<Failure, void>> registerWithEmail(
       String email, String password);
   Future<Either<Failure, void>> logOut();
+  Future<Either<Failure, void>> editProfile(UserModel user);
 }
