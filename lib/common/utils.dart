@@ -9,5 +9,8 @@ void showSnackBar(BuildContext context, String text) =>
         ),
       );
 
-SnackBar showSnackBarWithoutContext(String text) =>
-    SnackBar(content: Text(text));
+SnackBar showSnackBarWithoutContext(String text) => SnackBar(
+      content: Text(text),
+      backgroundColor: Colors.red,
+      behavior: SnackBarBehavior.floating,
+    );

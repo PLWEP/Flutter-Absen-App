@@ -35,8 +35,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
     state = state.copyWith(state: EnumState.loading);
     final user = _getCurrentUser.execute();
     user.fold(
-      (l) =>
-          state = state.copyWith(state: EnumState.failure, message: l.message),
+      (l) {
+        state = state.copyWith(state: EnumState.failure, message: l.message);
+        snackbarKey.currentState
+            ?.showSnackBar(showSnackBarWithoutContext(l.message));
+      },
       (r) async {
         if (r == null) {
           state = const AuthState.initial();
@@ -44,8 +47,12 @@ class AuthNotifier extends StateNotifier<AuthState> {
           final userData = await _getUserData.execute(r.uid);
 
           userData.fold(
-            (l) => state =
-                state.copyWith(state: EnumState.failure, message: l.message),
+            (l) {
+              state =
+                  state.copyWith(state: EnumState.failure, message: l.message);
+              snackbarKey.currentState
+                  ?.showSnackBar(showSnackBarWithoutContext(l.message));
+            },
             (r) => state = state.copyWith(state: EnumState.loaded, userData: r),
           );
         }
@@ -60,8 +67,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
     state = state.copyWith(state: EnumState.loading);
     final user = await _signInWithEmail.execute(email, password);
     user.fold(
-      (l) =>
-          state = state.copyWith(state: EnumState.failure, message: l.message),
+      (l) {
+        state = state.copyWith(state: EnumState.failure, message: l.message);
+        snackbarKey.currentState
+            ?.showSnackBar(showSnackBarWithoutContext(l.message));
+      },
       (r) => getCurrentUser(),
     );
   }
@@ -74,8 +84,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
     final user = await _registerWithEmail.execute(email, password);
 
     user.fold(
-      (l) =>
-          state = state.copyWith(state: EnumState.failure, message: l.message),
+      (l) {
+        state = state.copyWith(state: EnumState.failure, message: l.message);
+        snackbarKey.currentState
+            ?.showSnackBar(showSnackBarWithoutContext(l.message));
+      },
       (r) => getCurrentUser(),
     );
   }

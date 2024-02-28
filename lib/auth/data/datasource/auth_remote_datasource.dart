@@ -20,7 +20,7 @@ class AuthRemoteDatasource {
     try {
       return _auth.currentUser;
     } catch (e) {
-      throw ServerException();
+      throw ServerException(e.toString());
     }
   }
 
@@ -31,7 +31,7 @@ class AuthRemoteDatasource {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
-      throw ServerException();
+      throw ServerException(e.toString());
     }
   }
 
@@ -44,7 +44,7 @@ class AuthRemoteDatasource {
               UserModel.fromJson(event.data() as Map<String, dynamic>))
           .first;
     } catch (e) {
-      throw ServerException();
+      throw ServerException(e.toString());
     }
   }
 
@@ -66,7 +66,7 @@ class AuthRemoteDatasource {
       );
       await _users.doc(userCredential.user!.uid).set(userModel.toJson());
     } catch (e) {
-      throw ServerException();
+      throw ServerException(e.toString());
     }
   }
 
@@ -74,7 +74,7 @@ class AuthRemoteDatasource {
     try {
       await _auth.signOut();
     } catch (e) {
-      throw ServerException();
+      throw ServerException(e.toString());
     }
   }
 }

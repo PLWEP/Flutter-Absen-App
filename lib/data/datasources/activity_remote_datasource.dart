@@ -16,7 +16,7 @@ class ActivityRemoteDatasource {
     try {
       await _activities.doc(activity.id).set(activity.toJson());
     } catch (e) {
-      throw ServerException();
+      throw ServerException(e.toString());
     }
   }
 
@@ -32,7 +32,7 @@ class ActivityRemoteDatasource {
                 .toList(),
           );
     } catch (e) {
-      throw ServerException();
+      throw ServerException(e.toString());
     }
   }
 
@@ -40,7 +40,7 @@ class ActivityRemoteDatasource {
     try {
       await _activities.doc(activity.id).delete();
     } catch (e) {
-      throw ServerException();
+      throw ServerException(e.toString());
     }
   }
 
@@ -50,7 +50,7 @@ class ActivityRemoteDatasource {
             (event) => Activity.fromJson(event.data() as Map<String, dynamic>),
           );
     } catch (e) {
-      throw ServerException();
+      throw ServerException(e.toString());
     }
   }
 
@@ -58,7 +58,7 @@ class ActivityRemoteDatasource {
     try {
       await _activities.doc(activity.id).update(activity.toJson());
     } catch (e) {
-      throw ServerException();
+      throw ServerException(e.toString());
     }
   }
 }

@@ -21,7 +21,7 @@ class ActivityStorageDatasource {
 
       return await snapshot.ref.getDownloadURL();
     } catch (e) {
-      throw ServerException();
+      throw ServerException(e.toString());
     }
   }
 
@@ -32,7 +32,7 @@ class ActivityStorageDatasource {
     try {
       return await _firebaseStorage.ref().child(path).child(id).delete();
     } catch (e) {
-      throw ServerException();
+      throw ServerException(e.toString());
     }
   }
 }
