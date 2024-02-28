@@ -11,7 +11,6 @@ import 'package:absen_app/common/snackbar.dart';
 import 'package:absen_app/auth/domain/usecases/log_out.dart';
 import 'package:absen_app/auth/domain/usecases/register_with_email.dart';
 import 'package:absen_app/auth/domain/usecases/sign_in_with_email.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
