@@ -16,13 +16,13 @@ class AuthController extends StateNotifier<bool> {
   final Ref _ref;
   AuthController({
     required Ref ref,
-    required LogOut logOut,
-    required RegisterWithEmail registerWithEmail,
-    required SignInWithEmail signInWithEmail,
+    required LogOut logOutUseCase,
+    required RegisterWithEmail registerWithEmailUseCase,
+    required SignInWithEmail signInWithEmailUseCase,
   })  : _ref = ref,
-        _logOut = logOut,
-        _registerWithEmail = registerWithEmail,
-        _signInWithEmail = signInWithEmail,
+        _logOut = logOutUseCase,
+        _registerWithEmail = registerWithEmailUseCase,
+        _signInWithEmail = signInWithEmailUseCase,
         super(false);
 
   void signInWithEmail(
@@ -99,9 +99,9 @@ final signInWithEmailProvider = Provider(
 final authControllerProvider = StateNotifierProvider<AuthController, bool>(
   (ref) {
     return AuthController(
-      logOut: ref.watch(logOutProvider),
-      signInWithEmail: ref.watch(signInWithEmailProvider),
-      registerWithEmail: ref.watch(registerWithEmailProvider),
+      logOutUseCase: ref.watch(logOutProvider),
+      signInWithEmailUseCase: ref.watch(signInWithEmailProvider),
+      registerWithEmailUseCase: ref.watch(registerWithEmailProvider),
       ref: ref,
     );
   },

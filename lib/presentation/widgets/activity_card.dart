@@ -1,7 +1,7 @@
 import 'package:absen_app/common/widget/error_text.dart';
 import 'package:absen_app/common/widget/loader.dart';
-import 'package:absen_app/features/activity/provider/activity_provider.dart';
-import 'package:absen_app/data/model/activity_model.dart';
+import 'package:absen_app/data/models/activity.dart';
+import 'package:absen_app/presentation/providers/activity_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -12,9 +12,8 @@ class ActivityCard extends ConsumerWidget {
   final Activity activity;
   const ActivityCard({super.key, required this.activity});
 
-  void deleteActivity(WidgetRef ref, BuildContext context) => ref
-      .read(activityControllerProvider.notifier)
-      .deleteActivity(context, activity);
+  void deleteActivity(WidgetRef ref, BuildContext context) =>
+      ref.read(activityControllerProvider.notifier).deleteActivity(activity);
 
   void navigateToEditActivity(BuildContext context) =>
       Routemaster.of(context).push('/edit-activity/${activity.id}');

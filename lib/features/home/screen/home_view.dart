@@ -3,7 +3,7 @@ import 'package:absen_app/common/widget/loader.dart';
 import 'package:absen_app/features/activity/provider/activity_provider.dart';
 import 'package:absen_app/features/auth/provider/auth_provider.dart';
 import 'package:absen_app/features/home/provider/pdf_provider.dart';
-import 'package:absen_app/features/home/widget/activity_card.dart';
+import 'package:absen_app/presentation/widgets/activity_card.dart';
 import 'package:absen_app/data/model/activity_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
