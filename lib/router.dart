@@ -22,7 +22,7 @@ final loggedInRoute = RouteMap(
     // '/profile': (_) => const MaterialPage(child: ProfileView()),
     // '/edit-profile': (_) => const MaterialPage(child: EditProfileView()),
     // '/photo': (_) => const MaterialPage(child: PhotoView()),
-    '/add-activity': (_) => const MaterialPage(child: AddActivityView()),
+    // '/add-activity': (_) => const MaterialPage(child: AddActivityView()),
     // '/edit-activity/:activityId': (route) => MaterialPage(
     //     child:
     //         EditActivityView(activityId: route.pathParameters['activityId']!)),

@@ -1,5 +1,4 @@
 import 'package:absen_app/common/failure.dart';
-import 'package:absen_app/auth/data/model/user.dart';
 import 'package:absen_app/auth/domain/repository/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -8,7 +7,7 @@ class SignInWithEmail {
 
   SignInWithEmail(this.repository);
 
-  Future<Either<Failure, UserModel>> execute(
+  Future<Either<Failure, void>> execute(
     String email,
     String password,
   ) {

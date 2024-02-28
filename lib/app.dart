@@ -1,5 +1,5 @@
+import 'package:absen_app/auth/presentation/presentation_provider.dart';
 import 'package:absen_app/common/key.dart';
-import 'package:absen_app/auth/presentation/notifier/auth_notifier.dart';
 import 'package:absen_app/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +10,8 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider);
+    final authState = ref.watch(authNotifierProvider);
+
     return MaterialApp.router(
       scaffoldMessengerKey: snackbarKey,
       title: 'Absen Application',
@@ -19,7 +20,7 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       routerDelegate: RoutemasterDelegate(
         routesBuilder: (context) {
-          if (user != null) {
+          if (authState.userData != null) {
             return loggedInRoute;
           }
           return loggedOutRoute;

@@ -1,4 +1,5 @@
 import 'package:absen_app/auth/presentation/presentation_provider.dart';
+import 'package:absen_app/common/constants.dart';
 import 'package:absen_app/common/widget/loader.dart';
 import 'package:absen_app/common/widget/custom_layout.dart';
 import 'package:absen_app/common/widget/custom_text_input.dart';
@@ -41,7 +42,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(authNotifierProvider);
+    final authState = ref.watch(authNotifierProvider);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -73,7 +74,9 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           CustomTextInput(
                             title: "Email",
                             controller: _emailController,
-                            enabled: isLoading ? false : true,
+                            enabled: authState.state == EnumState.loading
+                                ? false
+                                : true,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please Fill The Field";
@@ -88,7 +91,9 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           PasswordTextInput(
                             title: "Password",
                             controller: _passwordController,
-                            enabled: isLoading ? false : true,
+                            enabled: authState.state == EnumState.loading
+                                ? false
+                                : true,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please Fill The Field";
@@ -103,7 +108,9 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           PasswordTextInput(
                             title: "Confirm Password",
                             controller: _confirmPasswordController,
-                            enabled: isLoading ? false : true,
+                            enabled: authState.state == EnumState.loading
+                                ? false
+                                : true,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please Fill The Field";
@@ -140,7 +147,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               register();
-                              if (isLoading == false) {
+                              if (authState.state == EnumState.loaded) {
                                 Routemaster.of(context).pop();
                               }
                             }
@@ -149,7 +156,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                             backgroundColor:
                                 const Color.fromRGBO(13, 71, 161, 1),
                           ),
-                          child: isLoading
+                          child: authState.state == EnumState.loading
                               ? const Loader()
                               : const Text(
                                   'Sign Up',

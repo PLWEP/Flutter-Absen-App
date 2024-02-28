@@ -16,35 +16,39 @@ class AuthRemoteDatasource {
   CollectionReference get _users =>
       _firestore.collection(Constants.usersCollection);
 
-  Future<UserModel> signInWithEmail(
+  User? getCurentUser() {
+    try {
+      return _auth.currentUser;
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  Future<void> signInWithEmail(
     String email,
     String password,
   ) async {
     try {
-      final userCredential = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      UserModel userModel = await getUserData(userCredential.user!.uid).first;
-
-      return userModel;
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
       throw ServerException();
     }
   }
 
-  Stream<UserModel> getUserData(String uid) {
+  Future<UserModel> getUserData(String uid) {
     try {
-      return _users.doc(uid).snapshots().map(
-            (event) => UserModel.fromJson(event.data() as Map<String, dynamic>),
-          );
+      return _users
+          .doc(uid)
+          .snapshots()
+          .map((event) =>
+              UserModel.fromJson(event.data() as Map<String, dynamic>))
+          .first;
     } catch (e) {
       throw ServerException();
     }
   }
 
-  Future<UserModel> registerWithEmail(
+  Future<void> registerWithEmail(
     String email,
     String password,
   ) async {
@@ -61,8 +65,6 @@ class AuthRemoteDatasource {
         profilePic: userCredential.user!.photoURL ?? '',
       );
       await _users.doc(userCredential.user!.uid).set(userModel.toJson());
-
-      return userModel;
     } catch (e) {
       throw ServerException();
     }

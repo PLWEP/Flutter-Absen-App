@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:absen_app/auth/presentation/presentation_provider.dart';
 import 'package:absen_app/presentation/providers/activity_provider.dart';
 import 'package:absen_app/auth/presentation/notifier/auth_notifier.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +18,17 @@ class HomeView extends ConsumerWidget {
   void navigateToAddActivity(BuildContext context) =>
       Routemaster.of(context).push('/add-activity');
 
+  void logOut(WidgetRef ref, BuildContext context) =>
+      ref.read(authNotifierProvider.notifier).logout();
+
   // void exportToPdf(
   //         BuildContext context, WidgetRef ref, List<Activity> activities) =>
   //     ref.read(pdfControllerProvider.notifier).exportPDF(context, activities);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider)!;
-    final activityState = ref.watch(activityControllerProvider);
+    // final user = ref.watch(userProvider)!;
+    // final activityState = ref.watch(activityControllerProvider);
     // final isPDFLoading = ref.watch(pdfControllerProvider);
     return SafeArea(
       child: Scaffold(
@@ -30,27 +36,28 @@ class HomeView extends ConsumerWidget {
           toolbarHeight: 80,
           title: Row(
             children: [
-              GestureDetector(
-                onTap: () => navigateToProfile(context),
-                child: Builder(
-                  builder: (context) {
-                    if (user.profilePic == '') {
-                      return const CircleAvatar(
-                        radius: 20,
-                        backgroundImage: AssetImage('assets/profile.jpeg'),
-                      );
-                    }
-                    return CircleAvatar(
-                      radius: 20,
-                      backgroundImage: NetworkImage(user.profilePic),
-                    );
-                  },
-                ),
-              ),
+              // GestureDetector(
+              //   onTap: () => navigateToProfile(context),
+              //   child: Builder(
+              //     builder: (context) {
+              //       if (user.profilePic == '') {
+              //         return const CircleAvatar(
+              //           radius: 20,
+              //           backgroundImage: AssetImage('assets/profile.jpeg'),
+              //         );
+              //       }
+              //       return CircleAvatar(
+              //         radius: 20,
+              //         backgroundImage: NetworkImage(user.profilePic),
+              //       );
+              //     },
+              //   ),
+              // ),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  'Hi ${user.name}!',
+                  // 'Hi ${user.name}!',
+                  'Hi !',
                   style: const TextStyle(
                     overflow: TextOverflow.fade,
                     fontSize: 20,
@@ -79,7 +86,7 @@ class HomeView extends ConsumerWidget {
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
-          onPressed: () => navigateToAddActivity(context),
+          onPressed: () => logOut(ref, context),
           child: const Icon(Icons.add),
         ),
         body: Column(

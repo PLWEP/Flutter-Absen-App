@@ -1,4 +1,5 @@
 import 'package:absen_app/auth/presentation/presentation_provider.dart';
+import 'package:absen_app/common/constants.dart';
 import 'package:absen_app/common/widget/loader.dart';
 import 'package:absen_app/common/widget/custom_layout.dart';
 import 'package:absen_app/common/widget/custom_text_input.dart';
@@ -36,7 +37,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(authNotifierProvider);
+    final authState = ref.watch(authNotifierProvider);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -66,7 +67,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         CustomTextInput(
                             title: "Email",
                             controller: _emailController,
-                            enabled: isLoading ? false : true,
+                            enabled: authState.state == EnumState.loading
+                                ? false
+                                : true,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please Fill The Field";
@@ -80,7 +83,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         PasswordTextInput(
                           title: "Password",
                           controller: _passwordController,
-                          enabled: isLoading ? false : true,
+                          enabled: authState.state == EnumState.loading
+                              ? false
+                              : true,
                           validator: (value) =>
                               value!.isEmpty ? "Please Fill The Field" : null,
                         ),
@@ -114,7 +119,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
                         ),
-                        child: isLoading
+                        child: authState.state == EnumState.loading
                             ? const Loader()
                             : const Text(
                                 'Sign In',

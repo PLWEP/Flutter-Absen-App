@@ -7,3 +7,10 @@ class Constants {
   static const defaultAvatar = 'assets/profile.jpeg';
   static const Color defaultColor = Color.fromRGBO(13, 71, 161, 1);
 }
+
+enum EnumState {
+  initial,
+  loading,
+  loaded,
+  failure,
+}

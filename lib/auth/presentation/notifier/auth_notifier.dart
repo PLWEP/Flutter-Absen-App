@@ -1,38 +1,68 @@
-import 'package:absen_app/common/key.dart';
+import 'package:absen_app/auth/domain/usecases/get_current_user.dart';
+import 'package:absen_app/auth/domain/usecases/get_user_data.dart';
+import 'package:absen_app/common/constants.dart';
 import 'package:absen_app/auth/data/model/user.dart';
+import 'package:absen_app/common/key.dart';
 import 'package:absen_app/common/utils.dart';
 import 'package:absen_app/domain/usecases/log_out.dart';
 import 'package:absen_app/auth/domain/usecases/register_with_email.dart';
 import 'package:absen_app/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AuthNotifier extends StateNotifier<bool> {
+class AuthNotifier extends StateNotifier<AuthState> {
   final SignInWithEmail _signInWithEmail;
   final RegisterWithEmail _registerWithEmail;
   final LogOut _logOut;
-  final Ref _ref;
+  final GetCurrentUser _getCurrentUser;
+  final GetUserData _getUserData;
+
   AuthNotifier({
-    required Ref ref,
     required LogOut logOutUseCase,
     required RegisterWithEmail registerWithEmailUseCase,
     required SignInWithEmail signInWithEmailUseCase,
-  })  : _ref = ref,
-        _logOut = logOutUseCase,
+    required GetCurrentUser getCurrentUserUseCase,
+    required GetUserData getUserDataUseCase,
+  })  : _logOut = logOutUseCase,
         _registerWithEmail = registerWithEmailUseCase,
         _signInWithEmail = signInWithEmailUseCase,
-        super(false);
+        _getCurrentUser = getCurrentUserUseCase,
+        _getUserData = getUserDataUseCase,
+        super(const AuthState.initial()) {
+    getCurrentUser();
+  }
+
+  void getCurrentUser() {
+    state = state.copyWith(state: EnumState.loading);
+    final user = _getCurrentUser.execute();
+    user.fold(
+      (l) =>
+          state = state.copyWith(state: EnumState.failure, message: l.message),
+      (r) async {
+        if (r == null) {
+          state = const AuthState.initial();
+        } else {
+          final userData = await _getUserData.execute(r.uid);
+
+          userData.fold(
+            (l) => state =
+                state.copyWith(state: EnumState.failure, message: l.message),
+            (r) => state = state.copyWith(state: EnumState.loaded, userData: r),
+          );
+        }
+      },
+    );
+  }
 
   void signInWithEmail(
     String email,
     String password,
   ) async {
-    state = true;
+    state = state.copyWith(state: EnumState.loading);
     final user = await _signInWithEmail.execute(email, password);
-    state = false;
     user.fold(
-      (l) => snackbarKey.currentState
-          ?.showSnackBar(showSnackBarWithoutContext(l.message)),
-      (r) => _ref.read(userProvider.notifier).update((state) => r),
+      (l) =>
+          state = state.copyWith(state: EnumState.failure, message: l.message),
+      (r) => getCurrentUser(),
     );
   }
 
@@ -40,30 +70,57 @@ class AuthNotifier extends StateNotifier<bool> {
     String email,
     String password,
   ) async {
-    state = true;
+    state = state.copyWith(state: EnumState.loading);
     final user = await _registerWithEmail.execute(email, password);
-    state = false;
+
     user.fold(
-      (l) => snackbarKey.currentState
-          ?.showSnackBar(showSnackBarWithoutContext(l.message)),
-      (r) => _ref.read(userProvider.notifier).update((state) => r),
+      (l) =>
+          state = state.copyWith(state: EnumState.failure, message: l.message),
+      (r) => getCurrentUser(),
     );
   }
 
   void logout() async {
-    state = true;
+    state = state.copyWith(state: EnumState.loading);
     final res = await _logOut.execute();
-    state = false;
+
     res.fold(
-      (l) => snackbarKey.currentState
-          ?.showSnackBar(showSnackBarWithoutContext(l.message)),
-      (r) {
-        _ref.read(userProvider.notifier).update((state) => null);
+      (l) {
+        state = state.copyWith(state: EnumState.failure, message: l.message);
         snackbarKey.currentState
-            ?.showSnackBar(showSnackBarWithoutContext('Log Out'));
+            ?.showSnackBar(showSnackBarWithoutContext(l.message));
       },
+      (r) => getCurrentUser(),
     );
   }
 }
 
-final userProvider = StateProvider<UserModel?>((ref) => null);
+class AuthState {
+  final UserModel? userData;
+  final EnumState state;
+  final String message;
+
+  const AuthState({
+    this.userData,
+    this.state = EnumState.initial,
+    this.message = '',
+  });
+
+  const AuthState.initial({
+    this.userData,
+    this.state = EnumState.initial,
+    this.message = '',
+  });
+
+  AuthState copyWith({
+    UserModel? userData,
+    EnumState? state,
+    String? message,
+  }) {
+    return AuthState(
+      userData: userData ?? this.userData,
+      state: state ?? this.state,
+      message: message ?? this.message,
+    );
+  }
+}
