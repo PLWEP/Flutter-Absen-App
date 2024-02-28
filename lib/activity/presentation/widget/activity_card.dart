@@ -14,8 +14,10 @@ class ActivityCard extends ConsumerWidget {
   void deleteActivity(WidgetRef ref, BuildContext context) =>
       ref.read(activityNotifierProvider.notifier).deleteActivity(activity);
 
-  void navigateToEditActivity(BuildContext context) =>
-      Routemaster.of(context).push('/edit-activity/${activity.id}');
+  void navigateToEditActivity(BuildContext context, WidgetRef ref) {
+    ref.read(activityNotifierProvider.notifier).getActivityById(activity.id);
+    Routemaster.of(context).push('/edit-activity/');
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -52,7 +54,7 @@ class ActivityCard extends ConsumerWidget {
                     children: [
                       IconButton(
                         splashRadius: 20,
-                        onPressed: () => navigateToEditActivity(context),
+                        onPressed: () => navigateToEditActivity(context, ref),
                         icon: const Icon(
                           Icons.edit,
                         ),

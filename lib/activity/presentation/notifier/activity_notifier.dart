@@ -6,6 +6,7 @@ import 'package:absen_app/activity/domain/usecases/delete_activity.dart';
 import 'package:absen_app/activity/domain/usecases/delete_file.dart';
 import 'package:absen_app/activity/domain/usecases/edit_activity.dart';
 import 'package:absen_app/activity/domain/usecases/fetch_user_activity.dart';
+import 'package:absen_app/activity/domain/usecases/get_activity_by_id.dart';
 import 'package:absen_app/activity/domain/usecases/store_file.dart';
 import 'package:absen_app/auth/presentation/presentation_provider.dart';
 import 'package:absen_app/common/constants.dart';
@@ -21,6 +22,7 @@ class ActivityNotifier extends StateNotifier<ActivityState> {
   final DeleteActivity _deleteActivity;
   final EditActivity _editActivity;
   final FetchUserActivity _fetchUserActivity;
+  final GetActivityById _getActivityById;
   final DeleteFile _deleteFile;
   final StoreFile _storeFile;
   final Ref _ref;
@@ -30,6 +32,7 @@ class ActivityNotifier extends StateNotifier<ActivityState> {
     required DeleteActivity deleteActivityUseCase,
     required EditActivity editActivityUseCase,
     required FetchUserActivity fetchUserActivityUseCase,
+    required GetActivityById getActivityByIdUseCase,
     required DeleteFile deleteFileUseCase,
     required StoreFile storeFileUseCase,
     required Ref ref,
@@ -37,6 +40,7 @@ class ActivityNotifier extends StateNotifier<ActivityState> {
         _deleteActivity = deleteActivityUseCase,
         _editActivity = editActivityUseCase,
         _fetchUserActivity = fetchUserActivityUseCase,
+        _getActivityById = getActivityByIdUseCase,
         _deleteFile = deleteFileUseCase,
         _storeFile = storeFileUseCase,
         _ref = ref,
@@ -158,7 +162,7 @@ class ActivityNotifier extends StateNotifier<ActivityState> {
             ?.showSnackBar(showSnackBarWithoutContextRed(l.message));
       },
       (r) {
-        state = state.copyWith(state: EnumState.loaded);
+        state = state.copyWith(state: EnumState.loaded, activity: null);
         fetchUserActivity();
         Routemaster.of(context).pop();
       },
@@ -166,6 +170,7 @@ class ActivityNotifier extends StateNotifier<ActivityState> {
   }
 
   void fetchUserActivity() async {
+    state = state.copyWith(state: EnumState.loading);
     final uid = _ref.read(authNotifierProvider).userData!.uid;
     final res = await _fetchUserActivity.execute(uid);
 
@@ -182,6 +187,29 @@ class ActivityNotifier extends StateNotifier<ActivityState> {
         state = state.copyWith(
           state: EnumState.loaded,
           activityList: r,
+          activity: null,
+        );
+      },
+    );
+  }
+
+  void getActivityById(String activityId) async {
+    state = state.copyWith(state: EnumState.loading);
+    final res = await _getActivityById.execute(activityId);
+
+    res.fold(
+      (l) {
+        state = state.copyWith(
+          state: EnumState.failure,
+          message: l.message,
+        );
+        snackbarKey.currentState
+            ?.showSnackBar(showSnackBarWithoutContextRed(l.message));
+      },
+      (r) {
+        state = state.copyWith(
+          state: EnumState.loaded,
+          activity: r,
         );
       },
     );
@@ -190,28 +218,33 @@ class ActivityNotifier extends StateNotifier<ActivityState> {
 
 class ActivityState {
   final List<Activity> activityList;
+  final Activity? activity;
   final EnumState state;
   final String message;
 
   const ActivityState({
     this.activityList = const [],
+    this.activity,
     this.state = EnumState.initial,
     this.message = '',
   });
 
   const ActivityState.initial({
     this.activityList = const [],
+    this.activity,
     this.state = EnumState.initial,
     this.message = '',
   });
 
   ActivityState copyWith({
     List<Activity>? activityList,
+    Activity? activity,
     EnumState? state,
     String? message,
   }) {
     return ActivityState(
       activityList: activityList ?? this.activityList,
+      activity: activity ?? this.activity,
       state: state ?? this.state,
       message: message ?? this.message,
     );

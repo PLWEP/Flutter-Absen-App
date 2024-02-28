@@ -5,7 +5,7 @@ import 'package:absen_app/common/constants.dart';
 import 'package:absen_app/common/key.dart';
 import 'package:absen_app/common/snackbar.dart';
 import 'package:absen_app/common/text_form_activity_decoration.dart';
-import 'package:absen_app/common/widget/image_pick.dart';
+import 'package:absen_app/common/image_pick.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';

@@ -1,7 +1,7 @@
 import 'package:absen_app/auth/presentation/presentation_provider.dart';
 import 'package:absen_app/common/constants.dart';
 import 'package:absen_app/auth/presentation/widget/custom_layout.dart';
-import 'package:absen_app/common/widget/custom_text_input.dart';
+import 'package:absen_app/common/custom_text_input.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

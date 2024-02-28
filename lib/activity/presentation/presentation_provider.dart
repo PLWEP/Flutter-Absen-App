@@ -10,6 +10,7 @@ final activityNotifierProvider =
       editActivityUseCase: ref.watch(editActivityProvider),
       deleteActivityUseCase: ref.watch(deleteActivityProvider),
       fetchUserActivityUseCase: ref.watch(fetchUserActivityProvider),
+      getActivityByIdUseCase: ref.watch(getActivityByIdProvider),
       deleteFileUseCase: ref.watch(deleteFileProvider),
       storeFileUseCase: ref.watch(storeFileProvider),
       ref: ref,
