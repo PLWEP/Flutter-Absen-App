@@ -1,8 +1,6 @@
-import 'dart:math';
-
-import 'package:absen_app/auth/presentation/presentation_provider.dart';
-import 'package:absen_app/presentation/providers/activity_provider.dart';
-import 'package:absen_app/auth/presentation/notifier/auth_notifier.dart';
+import 'package:absen_app/activity/presentation/presentation_provider.dart';
+import 'package:absen_app/activity/presentation/widget/activity_card.dart';
+import 'package:absen_app/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
@@ -18,9 +16,6 @@ class HomeView extends ConsumerWidget {
   void navigateToAddActivity(BuildContext context) =>
       Routemaster.of(context).push('/add-activity');
 
-  void logOut(WidgetRef ref, BuildContext context) =>
-      ref.read(authNotifierProvider.notifier).logout();
-
   // void exportToPdf(
   //         BuildContext context, WidgetRef ref, List<Activity> activities) =>
   //     ref.read(pdfControllerProvider.notifier).exportPDF(context, activities);
@@ -28,7 +23,7 @@ class HomeView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // final user = ref.watch(userProvider)!;
-    // final activityState = ref.watch(activityControllerProvider);
+    final activityState = ref.watch(activityNotifierProvider);
     // final isPDFLoading = ref.watch(pdfControllerProvider);
     return SafeArea(
       child: Scaffold(
@@ -86,28 +81,30 @@ class HomeView extends ConsumerWidget {
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
-          onPressed: () => logOut(ref, context),
-          child: const Icon(Icons.add),
+          onPressed: () => navigateToAddActivity(context),
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
         body: Column(
           children: [
-            // activityState
-            //     ? const Loader()
-            //     : ref.watch(userActivityProvider).when(
-            //           data: (data) => Expanded(
-            //             child: ListView.builder(
-            //               restorationId: 'classListView',
-            //               itemCount: data.length,
-            //               itemBuilder: (BuildContext context, int index) {
-            //                 final item = data[index];
-            //                 return ActivityCard(activity: item);
-            //               },
-            //             ),
-            //           ),
-            //           error: (error, stackTrace) =>
-            //               ErrorText(error: error.toString()),
-            //           loading: () => const Loader(),
-            //         ),
+            activityState.state == EnumState.loading
+                ? const Loader()
+                : activityState.state == EnumState.failure
+                    ? ErrorText(error: activityState.message)
+                    : activityState.activityList.isEmpty
+                        ? const EmptyText()
+                        : Expanded(
+                            child: ListView.builder(
+                              restorationId: 'classListView',
+                              itemCount: activityState.activityList.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                final item = activityState.activityList[index];
+                                return ActivityCard(activity: item);
+                              },
+                            ),
+                          ),
           ],
         ),
       ),

@@ -3,8 +3,8 @@ import 'package:absen_app/auth/domain/usecases/get_user_data.dart';
 import 'package:absen_app/common/constants.dart';
 import 'package:absen_app/auth/data/model/user.dart';
 import 'package:absen_app/common/key.dart';
-import 'package:absen_app/common/utils.dart';
-import 'package:absen_app/domain/usecases/log_out.dart';
+import 'package:absen_app/common/snackbar.dart';
+import 'package:absen_app/auth/domain/usecases/log_out.dart';
 import 'package:absen_app/auth/domain/usecases/register_with_email.dart';
 import 'package:absen_app/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,7 +38,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       (l) {
         state = state.copyWith(state: EnumState.failure, message: l.message);
         snackbarKey.currentState
-            ?.showSnackBar(showSnackBarWithoutContext(l.message));
+            ?.showSnackBar(showSnackBarWithoutContextRed(l.message));
       },
       (r) async {
         if (r == null) {
@@ -51,7 +51,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
               state =
                   state.copyWith(state: EnumState.failure, message: l.message);
               snackbarKey.currentState
-                  ?.showSnackBar(showSnackBarWithoutContext(l.message));
+                  ?.showSnackBar(showSnackBarWithoutContextRed(l.message));
             },
             (r) => state = state.copyWith(state: EnumState.loaded, userData: r),
           );
@@ -70,7 +70,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       (l) {
         state = state.copyWith(state: EnumState.failure, message: l.message);
         snackbarKey.currentState
-            ?.showSnackBar(showSnackBarWithoutContext(l.message));
+            ?.showSnackBar(showSnackBarWithoutContextRed(l.message));
       },
       (r) => getCurrentUser(),
     );
@@ -87,7 +87,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       (l) {
         state = state.copyWith(state: EnumState.failure, message: l.message);
         snackbarKey.currentState
-            ?.showSnackBar(showSnackBarWithoutContext(l.message));
+            ?.showSnackBar(showSnackBarWithoutContextRed(l.message));
       },
       (r) => getCurrentUser(),
     );
@@ -101,7 +101,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       (l) {
         state = state.copyWith(state: EnumState.failure, message: l.message);
         snackbarKey.currentState
-            ?.showSnackBar(showSnackBarWithoutContext(l.message));
+            ?.showSnackBar(showSnackBarWithoutContextRed(l.message));
       },
       (r) => getCurrentUser(),
     );

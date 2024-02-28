@@ -1,6 +1,6 @@
 import 'package:absen_app/common/constants.dart';
 import 'package:absen_app/common/exception.dart';
-import 'package:absen_app/data/models/activity.dart';
+import 'package:absen_app/activity/data/model/activity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ActivityRemoteDatasource {
@@ -20,9 +20,9 @@ class ActivityRemoteDatasource {
     }
   }
 
-  Stream<List<Activity>> fetchUserActivity(String uid) {
+  Future<List<Activity>> fetchUserActivity(String uid) async {
     try {
-      return _activities
+      return await _activities
           .where('uid', isEqualTo: uid)
           .orderBy('date', descending: true)
           .snapshots()
@@ -30,7 +30,8 @@ class ActivityRemoteDatasource {
             (event) => event.docs
                 .map((e) => Activity.fromJson(e.data() as Map<String, dynamic>))
                 .toList(),
-          );
+          )
+          .first;
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -44,11 +45,15 @@ class ActivityRemoteDatasource {
     }
   }
 
-  Stream<Activity> getActivityById(String activityId) {
+  Future<Activity> getActivityById(String activityId) async {
     try {
-      return _activities.doc(activityId).snapshots().map(
+      return await _activities
+          .doc(activityId)
+          .snapshots()
+          .map(
             (event) => Activity.fromJson(event.data() as Map<String, dynamic>),
-          );
+          )
+          .first;
     } catch (e) {
       throw ServerException(e.toString());
     }

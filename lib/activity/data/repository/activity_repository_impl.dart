@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:absen_app/common/exception.dart';
 import 'package:absen_app/common/failure.dart';
-import 'package:absen_app/data/datasources/activity_remote_datasource.dart';
-import 'package:absen_app/data/datasources/activity_storage_datasource.dart';
-import 'package:absen_app/data/models/activity.dart';
-import 'package:absen_app/domain/repositories/activity_repository.dart';
+import 'package:absen_app/activity/data/datasource/activity_remote_datasource.dart';
+import 'package:absen_app/activity/data/datasource/activity_storage_datasource.dart';
+import 'package:absen_app/activity/data/model/activity.dart';
+import 'package:absen_app/activity/domain/repository/activity_repository.dart';
 import 'package:fpdart/fpdart.dart';
 
 class ActivityRepositoryImpl implements ActivityRepository {
@@ -46,20 +46,18 @@ class ActivityRepositoryImpl implements ActivityRepository {
   }
 
   @override
-  Either<Failure, Stream<List<Activity>>> fetchUserActivity(String uid) {
+  Future<Either<Failure, List<Activity>>> fetchUserActivity(String uid) async {
     try {
-      final result = _activityRemoteDatasource.fetchUserActivity(uid);
-      return Right(result);
+      return Right(await _activityRemoteDatasource.fetchUserActivity(uid));
     } on ServerException {
       return const Left(ServerFailure('Terjadi kesalahan, coba lagi nanti'));
     }
   }
 
   @override
-  Either<Failure, Stream<Activity>> getActivityById(String activityId) {
+  Future<Either<Failure, Activity>> getActivityById(String activityId) async {
     try {
-      final result = _activityRemoteDatasource.getActivityById(activityId);
-      return Right(result);
+      return Right(await _activityRemoteDatasource.getActivityById(activityId));
     } on ServerException {
       return const Left(ServerFailure('Terjadi kesalahan, coba lagi nanti'));
     }
@@ -69,10 +67,7 @@ class ActivityRepositoryImpl implements ActivityRepository {
   Future<Either<Failure, void>> deleteFile(String path, String id) async {
     try {
       return Right(
-        await _activityStorageDatasource.deleteFile(
-          path: path,
-          id: id,
-        ),
+        await _activityStorageDatasource.deleteFile(path: path, id: id),
       );
     } on ServerException {
       return const Left(ServerFailure('Terjadi kesalahan, coba lagi nanti'));
