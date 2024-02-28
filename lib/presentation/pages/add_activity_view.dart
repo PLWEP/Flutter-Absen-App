@@ -5,7 +5,7 @@ import 'package:absen_app/common/text_form_activity_decoration.dart';
 import 'package:absen_app/common/utils.dart';
 import 'package:absen_app/common/widget/image_pick.dart';
 import 'package:absen_app/common/widget/loader.dart';
-import 'package:absen_app/features/activity/provider/activity_provider.dart';
+import 'package:absen_app/presentation/providers/activity_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -84,7 +84,7 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(activityControllerProvider);
+    final activityState = ref.watch(activityControllerProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Constants.defaultColor,
@@ -114,22 +114,23 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                   ),
                   const SizedBox(height: 10),
                   GestureDetector(
-                    onTap: () => isLoading
-                        ? {}
-                        : showDatePicker(
-                            context: context,
-                            initialDate: date,
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(2099),
-                          ).then(
-                            (value) {
-                              setState(() {
-                                if (value != null) {
-                                  date = value;
-                                }
-                              });
-                            },
-                          ),
+                    onTap: () =>
+                        activityState.state == ActivityEnumState.loading
+                            ? {}
+                            : showDatePicker(
+                                context: context,
+                                initialDate: date,
+                                firstDate: DateTime(2000),
+                                lastDate: DateTime(2099),
+                              ).then(
+                                (value) {
+                                  setState(() {
+                                    if (value != null) {
+                                      date = value;
+                                    }
+                                  });
+                                },
+                              ),
                     child: Container(
                       alignment: Alignment.center,
                       height: 50,
@@ -168,7 +169,9 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                   ),
                   const SizedBox(height: 15),
                   TextFormField(
-                    enabled: isLoading ? false : true,
+                    enabled: activityState.state == ActivityEnumState.loading
+                        ? false
+                        : true,
                     controller: _titleController,
                     validator: (value) =>
                         value!.isEmpty ? "Please Fill The Field" : null,
@@ -185,7 +188,9 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                   ),
                   const SizedBox(height: 15),
                   TextFormField(
-                    enabled: isLoading ? false : true,
+                    enabled: activityState.state == ActivityEnumState.loading
+                        ? false
+                        : true,
                     controller: _descriptionController,
                     validator: (value) =>
                         value!.isEmpty ? "Please Fill The Field" : null,
@@ -208,7 +213,10 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                       InkWell(
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
-                        onTap: () => isLoading ? {} : showPictureDialog(),
+                        onTap: () =>
+                            activityState.state == ActivityEnumState.loading
+                                ? {}
+                                : showPictureDialog(),
                         child: DottedBorder(
                           borderType: BorderType.RRect,
                           radius: const Radius.circular(10),
@@ -271,7 +279,7 @@ class _AddActivityViewState extends ConsumerState<AddActivityView> {
                         shadowColor: Colors.black,
                         padding: const EdgeInsets.all(10),
                       ),
-                      child: isLoading
+                      child: activityState.state == ActivityEnumState.loading
                           ? const Loader()
                           : const Text(
                               'Save',
