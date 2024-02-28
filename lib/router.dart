@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 
 final loggedOutRoute = RouteMap(
+  onUnknownRoute: (route) {
+    return const MaterialPage(child: LoginView());
+  },
   routes: {
     '/': (_) => const MaterialPage(child: LoginView()),
     '/register': (_) => const MaterialPage(child: RegisterView()),
@@ -17,6 +20,9 @@ final loggedOutRoute = RouteMap(
 );
 
 final loggedInRoute = RouteMap(
+  onUnknownRoute: (route) {
+    return const MaterialPage(child: HomeView());
+  },
   routes: {
     '/': (_) => const MaterialPage(child: HomeView()),
     // '/profile': (_) => const MaterialPage(child: ProfileView()),

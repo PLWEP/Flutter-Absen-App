@@ -28,12 +28,13 @@ class _LoginViewState extends ConsumerState<LoginView> {
 
   final _formKey = GlobalKey<FormState>();
 
-  void navigateToRegister() => Routemaster.of(context).push('/register');
+  void navigateToRegister() {
+    _formKey.currentState!.reset();
+    Routemaster.of(context).push('/register');
+  }
 
   void login() => ref.read(authNotifierProvider.notifier).signInWithEmail(
-        _emailController.text.trim(),
-        _passwordController.text.trim(),
-      );
+      _emailController.text.trim(), _passwordController.text.trim());
 
   @override
   Widget build(BuildContext context) {
@@ -65,20 +66,20 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         ),
                         const SizedBox(height: 10),
                         CustomTextInput(
-                            title: "Email",
-                            controller: _emailController,
-                            enabled: authState.state == EnumState.loading
-                                ? false
-                                : true,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Please Fill The Field";
-                              } else if (!EmailValidator.validate(value)) {
-                                return "Email is not valid";
-                              } else {
-                                return null;
-                              }
-                            }),
+                          title: "Email",
+                          controller: _emailController,
+                          enabled: authState.state == EnumState.loading
+                              ? false
+                              : true,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Fill The Field";
+                            } else if (!EmailValidator.validate(value)) {
+                              return "Email is not valid";
+                            }
+                            return null;
+                          },
+                        ),
                         const SizedBox(height: 15),
                         PasswordTextInput(
                           title: "Password",
@@ -89,9 +90,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           validator: (value) =>
                               value!.isEmpty ? "Please Fill The Field" : null,
                         ),
-                        const SizedBox(
-                          height: 15,
-                        ),
+                        const SizedBox(height: 15),
                       ],
                     ),
                     GestureDetector(

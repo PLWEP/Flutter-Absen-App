@@ -9,6 +9,7 @@ class CustomLayout extends StatelessWidget {
     return Stack(
       children: [
         Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               height: 150,
@@ -19,7 +20,6 @@ class CustomLayout extends StatelessWidget {
                 ),
               ),
             ),
-            const Expanded(child: SizedBox()),
             Container(
               height: 250,
               foregroundDecoration: const BoxDecoration(
